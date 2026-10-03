@@ -1,36 +1,26 @@
 {
-  "id": "./",
+  "id": "/Finanzas-personal-/",
   "name": "Rider Finanzas",
   "short_name": "Rider Finanzas",
   "description": "Control personal de ingresos, gastos, ahorro, presupuestos y decisiones de compra.",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/Finanzas-personal-/",
+  "scope": "/Finanzas-personal-/",
   "display": "standalone",
-  "display_override": [
-    "window-controls-overlay",
-    "standalone"
-  ],
   "background_color": "#090d13",
   "theme_color": "#ffcc00",
-  "orientation": "portrait-primary",
-  "lang": "es-PA",
-  "categories": [
-    "finance",
-    "productivity"
-  ],
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "./icon-192.png",
+      "src": "/Finanzas-personal-/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "./icon-512.png",
+      "src": "/Finanzas-personal-/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
