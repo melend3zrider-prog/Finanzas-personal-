@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11152a">
+<link rel="manifest" href="manifest.json">
+<title>Rider Finanzas</title>
+<style>
+:root{
+  --bg:#f5f7fb; --panel:#fff; --ink:#11152a; --muted:#7b8499; --line:#e9edf4;
+  --violet:#6c63ff; --violet2:#938cff; --cyan:#36c7ff; --green:#16b364; --red:#ef4d5b; --amber:#f59e0b;
+  --nav:#11152a; --shadow:0 18px 55px rgba(19,25,48,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{min-height:100vh}
+.sidebar{position:fixed;inset:0 auto 0 0;width:258px;padding:22px 16px;background:linear-gradient(180deg,#11152a 0%,#1a1f38 100%);color:#fff;z-index:30}
+.logo{display:flex;align-items:center;gap:11px;padding:5px 9px 30px}.logo-mark{width:41px;height:41px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,var(--violet),#9088ff);font-size:21px;font-weight:900;box-shadow:0 10px 25px #6c63ff44}.logo-text{font-size:16px;font-weight:850;letter-spacing:-.3px}.logo-text small{display:block;color:#9ba3bc;font-size:10px;font-weight:500;margin-top:3px}
+.nav-title{padding:0 12px 8px;color:#69718d;font-size:10px;text-transform:uppercase;letter-spacing:1.1px;font-weight:800}
+.nav button{width:100%;border:0;background:transparent;color:#b9c0d3;border-radius:12px;padding:12px 13px;margin:2px 0;text-align:left;font-size:13px;display:flex;align-items:center;gap:11px;transition:.18s}.nav button:hover{background:#ffffff0e;color:#fff}.nav button.active{background:linear-gradient(90deg,#6c63ff2a,#ffffff0a);color:#fff;box-shadow:inset 3px 0 var(--violet)}.nav-ico{width:21px;text-align:center;font-size:16px}
+.main{margin-left:258px;padding:28px 30px 42px;max-width:1550px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:23px}.hello{display:flex;align-items:center;gap:12px}.avatar{width:45px;height:45px;border-radius:14px;background:linear-gradient(135deg,#dedcff,#8b84ff);color:#312a9b;display:grid;place-items:center;font-weight:900;font-size:15px}.hello .eyebrow{font-size:11px;color:var(--muted);font-weight:700}.hello h1{font-size:25px;letter-spacing:-.7px;margin:2px 0 0}.top-actions{display:flex;align-items:center;gap:10px}.month{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 12px;color:var(--ink);box-shadow:0 4px 16px #19213c08}
+.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}
+.balance-card{position:relative;overflow:hidden;border-radius:24px;padding:25px;color:#fff;background:radial-gradient(circle at 90% 15%,#b9b5ff55,transparent 31%),linear-gradient(135deg,#554cff,#8078ff 63%,#4ecfff);box-shadow:0 22px 50px #675fff30}
+.balance-card:after{content:"";position:absolute;width:210px;height:210px;border:1px solid #ffffff24;border-radius:50%;right:-65px;bottom:-100px}.balance-card:before{content:"";position:absolute;width:130px;height:130px;border:1px solid #ffffff1b;border-radius:50%;right:65px;bottom:-72px}
+.balance-label{font-size:11px;color:#e9e7ff;text-transform:uppercase;letter-spacing:1px;font-weight:800}.balance{font-size:39px;line-height:1.05;font-weight:900;letter-spacing:-1.5px;margin:11px 0 14px}.balance-sub{font-size:12px;color:#ecebff}.balance-row{display:flex;gap:10px;margin-top:22px;position:relative;z-index:2}.quick{border:1px solid #ffffff35;background:#ffffff18;color:#fff;border-radius:11px;padding:10px 13px;font-weight:750;font-size:12px}.quick:hover{background:#ffffff28}
+.health{border-radius:24px;padding:22px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}.health-head{display:flex;justify-content:space-between;align-items:center}.health h2{font-size:15px;margin:0}.status{font-size:10px;font-weight:850;padding:5px 8px;border-radius:999px;background:#e8fbf1;color:#087a45}.score{display:flex;align-items:center;gap:15px;margin-top:19px}.ring{width:86px;height:86px;border-radius:50%;background:conic-gradient(var(--violet) 0 72%,#ececf5 72% 100%);display:grid;place-items:center;flex:0 0 auto}.ring span{width:65px;height:65px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:18px;font-weight:900}.health p{font-size:12px;line-height:1.55;color:var(--muted);margin:0}.health strong{color:var(--ink)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:16px}.kpi{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;padding:16px}.kpi-top{display:flex;align-items:center;justify-content:space-between}.kpi-icon{width:33px;height:33px;border-radius:10px;display:grid;place-items:center;background:#f0efff;color:#5148d8}.kpi .label{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:850}.kpi .money{font-size:22px;font-weight:900;margin:10px 0 3px;letter-spacing:-.5px}.kpi-note{font-size:10px;color:var(--muted)}.green{color:var(--green)}.red{color:var(--red)}
+.dashboard-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:18px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.panel h2{font-size:15px;margin:0;letter-spacing:-.2px}.panel .sub{font-size:11px;color:var(--muted)}
+.chart{height:185px;display:flex;align-items:end;gap:13px;padding:15px 5px 4px}.bar-col{height:100%;flex:1;display:flex;align-items:end;gap:4px}.bar-a,.bar-b{width:50%;border-radius:7px 7px 3px 3px}.bar-a{background:linear-gradient(180deg,#9088ff,var(--violet))}.bar-b{background:#e8eaf4}.bar-wrap{height:100%;display:flex;align-items:end;width:100%;gap:5px}.chart-labels{display:flex;justify-content:space-between;color:#9aa2b5;font-size:9px;margin-top:3px}
+.activity{display:grid;gap:4px}.activity-row{display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.activity-row:last-child{border-bottom:0}.activity-icon{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:#f4f3ff}.activity-desc{font-size:12px;font-weight:750}.activity-cat{font-size:10px;color:var(--muted);margin-top:2px}.activity-amt{font-weight:850;font-size:12px}.empty{padding:28px;text-align:center;color:var(--muted);font-size:12px}
+.budget-list{display:grid;gap:14px}.budget-line{display:grid;gap:7px}.budget-head{display:flex;justify-content:space-between;font-size:11px}.budget-head span:last-child{color:var(--muted)}.track{height:8px;border-radius:99px;background:#eef0f5;overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--violet),var(--cyan))}
+.page{display:none}.page.active{display:block}.card-main{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:20px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.section-head h2{margin:0;font-size:17px}.btn{border:0;border-radius:11px;padding:10px 13px;font-size:12px;font-weight:800}.btn-primary{background:var(--violet);color:#fff}.btn-soft{background:#f0efff;color:#5148d8}.btn-danger{background:#fff0ef;color:#b42318}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{padding:11px 8px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}.table th{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}.pill{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:850}.pill.in{background:#e7f9ef;color:#087a45}.pill.out{background:#fff0ef;color:#b42318}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:800;color:#485066}.field input,.field select{border:1px solid #dde2eb;border-radius:10px;padding:11px 12px;background:#fff;outline:none}.field input:focus,.field select:focus{border-color:#8d86ff;box-shadow:0 0 0 3px #e7e5ff}
+.modal{position:fixed;inset:0;display:none;place-items:center;background:#0c0f1ccc;z-index:50;padding:18px}.modal.open{display:grid}.modal-box{width:min(500px,100%);background:#fff;border-radius:22px;padding:22px;box-shadow:0 30px 90px #0005}.modal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.modal-top h2{font-size:17px;margin:0}.x{border:0;width:32px;height:32px;border-radius:50%;background:#f0f1f4}
+.toast{position:fixed;right:20px;bottom:20px;background:#11152a;color:#fff;border-radius:12px;padding:12px 16px;font-size:12px;display:none;z-index:80}
+.more-sheet{position:fixed;inset:0;background:#0c0f1c88;display:none;align-items:flex-end;z-index:60}.more-sheet.open{display:flex}.sheet{width:100%;background:#fff;border-radius:22px 22px 0 0;padding:17px}.sheet h3{margin:0 0 10px;font-size:15px}.sheet-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.sheet button{border:1px solid var(--line);background:#fafbff;padding:13px;border-radius:12px;text-align:left;font-weight:750;font-size:12px}
+@media(max-width:820px){.sidebar{width:82px;padding:18px 10px}.logo{justify-content:center;padding-bottom:24px}.logo-text,.nav-title{display:none}.logo-mark{margin:0}.nav button{justify-content:center;font-size:0}.nav-ico{font-size:17px}.main{margin-left:82px;width:calc(100% - 82px);padding:23px}.hero{grid-template-columns:1fr}.dashboard-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){
+ body{padding-bottom:73px}.sidebar{position:fixed;left:0;right:0;top:auto;bottom:0;width:100%;height:68px;padding:5px 6px;background:#11152af5;backdrop-filter:blur(18px);box-shadow:0 -12px 35px #11152a22}.logo,.nav-title{display:none}.nav{height:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:2px}.nav button{justify-content:center;align-items:center;gap:1px;padding:6px 2px;margin:0;border-radius:10px;font-size:8px;color:#aeb6cc;box-shadow:none}.nav button.active{background:#ffffff12;box-shadow:none;color:#fff}.nav-ico{font-size:17px}.nav button[data-page="dashboard"] .nav-label:after{content:"Inicio"}.nav button[data-page="movimientos"] .nav-label:after{content:"Movimientos"}.nav button[data-page="presupuesto"] .nav-label:after{content:"Presupuesto"}.nav button[data-page="ahorro"] .nav-label:after{content:"Ahorro"}.nav button[data-page="deudas"] .nav-label:after{content:"Más"} .nav button[data-page="deudas"] .nav-label{font-size:0}
+ .nav button[data-page="estadisticas"],.nav button[data-page="config"]{display:none}.main{margin:0;width:100%;padding:14px 12px 10px}.topbar{margin-bottom:14px;align-items:flex-start}.hello h1{font-size:21px}.avatar{width:40px;height:40px}.month{padding:8px 9px;font-size:11px}.hero{gap:10px}.balance-card{padding:20px;border-radius:20px}.balance{font-size:33px}.balance-row{margin-top:18px}.health{padding:17px;border-radius:19px}.kpis{gap:9px;margin-top:10px}.kpi{padding:13px;border-radius:15px}.kpi .money{font-size:19px}.dashboard-grid{gap:10px;margin-top:10px}.panel{padding:15px;border-radius:17px}.chart{height:155px;gap:8px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.table th:nth-child(1),.table td:nth-child(1){display:none}
+}
+
+/* Dashboard premium v4 */
+.alert-strip{display:none;margin-bottom:14px;border-radius:16px;padding:13px 16px;border:1px solid #fed7d7;background:linear-gradient(90deg,#fff4f2,#fff);box-shadow:0 10px 28px rgba(239,77,91,.08)}
+.alert-strip.show{display:flex;align-items:center;gap:11px}.alert-strip.warning{border-color:#f9d48d;background:linear-gradient(90deg,#fff8e8,#fff)}.alert-strip strong{font-size:12px}.alert-strip span{font-size:11px;color:var(--muted)}.alert-icon{width:31px;height:31px;border-radius:10px;display:grid;place-items:center;background:#ffe7e5;color:#b42318;font-weight:900}.warning .alert-icon{background:#ffefc7;color:#9a6700}
+.hero-pro{grid-template-columns:1.22fr .78fr}.pro-balance{min-height:264px}.hero-topline{display:flex;justify-content:space-between;align-items:center}.month-chip{padding:5px 8px;border:1px solid #ffffff2d;background:#ffffff15;border-radius:999px;font-size:9px;font-weight:800;color:#f1efff;text-transform:uppercase;letter-spacing:.5px}.balance-caption{font-size:11px;color:#ebe9ff;margin-top:21px}.balance-meter{height:7px;background:#ffffff26;border-radius:99px;overflow:hidden;margin:3px 0 9px}.balance-meter div{height:100%;background:linear-gradient(90deg,#fff,#a9f0ff);border-radius:99px}.pro-health{min-height:264px}.tiny-label{font-size:9px;letter-spacing:1px;color:#939bb0;font-weight:900;margin-bottom:4px;text-transform:uppercase}.big-ring{width:104px;height:104px}.big-ring span{width:78px;height:78px;font-size:21px}.health-percent{font-size:15px;font-weight:900;margin-bottom:4px}.signal-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:19px}.signal{border:1px solid var(--line);background:#fafbff;border-radius:11px;padding:10px}.signal span{display:block;color:var(--muted);font-size:9px}.signal b{font-size:14px;margin-top:3px;display:block}.pro-kpis{margin-top:13px}.green-icon{background:#e9f9f0!important;color:#087a45!important}.red-icon{background:#fff0ef!important;color:#b42318!important}.amber-icon{background:#fff5dc!important;color:#9a6700!important}
+.pro-grid{margin-top:13px}.spotlight-panel{min-height:260px}.category-radar{display:grid;gap:12px}.radar-row{display:grid;grid-template-columns:95px 1fr 60px;align-items:center;gap:10px;margin:9px 0}.radar-name{font-size:11px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.radar-track{height:9px;background:#eef0f5;border-radius:99px;overflow:hidden}.radar-fill{height:100%;background:linear-gradient(90deg,#7a72ff,#36c7ff);border-radius:99px}.radar-val{text-align:right;font-size:10px;color:var(--muted)}.lower{margin-top:13px}.chart-panel{min-height:260px}.insight-panel{margin-top:13px;display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(135deg,#fff 0%,#f5f4ff 100%)}.insight-panel h2{font-size:16px;margin:2px 0 5px}.insight-panel p{font-size:11px;color:var(--muted);margin:0}
+@media(max-width:650px){.hero-pro{grid-template-columns:1fr}.pro-balance,.pro-health{min-height:auto}.big-ring{width:92px;height:92px}.big-ring span{width:70px;height:70px}.signal-row{margin-top:13px}.radar-row{grid-template-columns:80px 1fr 53px}.insight-panel{align-items:flex-start;flex-direction:column}.insight-panel .btn{width:100%}}
+
+
+/* ===== DASHBOARD V5 ===== */
+.command-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:18px}.command-head h2{margin:2px 0 5px;font-size:25px;letter-spacing:-.8px}.command-head p{margin:0;color:var(--muted);font-size:12px}.command-actions{display:flex;gap:8px}.live-dot{display:inline-flex;align-items:center;gap:5px;font-size:8px;font-weight:900;color:#8fe7c0;letter-spacing:.6px}.live-dot i{width:6px;height:6px;border-radius:50%;background:#30d890;box-shadow:0 0 0 4px #30d89020}
+.dashboard-v5-top{display:grid;grid-template-columns:1.28fr .72fr;gap:14px}.net-card{position:relative;overflow:hidden;background:linear-gradient(135deg,#12162c,#202650 56%,#5159ba);border-radius:22px;padding:22px;color:#fff;box-shadow:0 20px 48px #20265026}.net-card:before{content:"";position:absolute;width:280px;height:280px;right:-130px;top:-170px;border:1px solid #ffffff16;border-radius:50%}.net-card:after{content:"";position:absolute;width:190px;height:190px;right:-65px;bottom:-135px;border:1px solid #ffffff12;border-radius:50%}.net-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}.net-label{font-size:9px;font-weight:900;letter-spacing:1.2px;color:#b9c0dc}.net-value{font-size:44px;font-weight:900;letter-spacing:-2px;margin:23px 0 4px;position:relative;z-index:1}.net-compare{color:#c5cae0;font-size:11px;position:relative;z-index:1}.net-track{height:7px;background:#ffffff1b;border-radius:99px;overflow:hidden;margin-top:18px;position:relative;z-index:1}.net-track div{height:100%;background:linear-gradient(90deg,#fff,#6ee7f9);border-radius:99px}.net-foot{display:flex;justify-content:space-between;color:#9fa7c4;font-size:9px;margin-top:7px;position:relative;z-index:1}.net-foot strong{color:#fff}.net-actions{display:flex;gap:7px;margin-top:17px;position:relative;z-index:1}.net-actions button{border:1px solid #ffffff25;background:#ffffff10;color:#fff;border-radius:9px;padding:8px 11px;font-size:10px;font-weight:800}.net-actions button:hover{background:#ffffff1c}
+.health-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:19px;box-shadow:var(--shadow)}.card-title-row{display:flex;justify-content:space-between;align-items:flex-start}.card-title-row h3,.dash-panel h3{margin:1px 0;font-size:15px;letter-spacing:-.2px}.health-badge{font-size:9px;font-weight:900;padding:5px 8px;border-radius:999px;background:#e8fbf1;color:#087a45}.health-main{display:flex;align-items:center;gap:14px;margin-top:21px}.gauge{width:95px;height:95px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--violet) 0 72%,#ececf4 72% 100%);flex:0 0 auto}.gauge>div{width:71px;height:71px;border-radius:50%;display:grid;place-items:center;background:#fff}.gauge b{font-size:24px}.gauge small{font-size:9px;color:var(--muted)}.health-main strong{font-size:13px}.health-main p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.45}.health-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:19px}.health-metrics div{padding:9px;border-radius:10px;background:#f8f9fc}.health-metrics span{display:block;color:var(--muted);font-size:8px}.health-metrics b{display:block;margin-top:3px;font-size:12px}
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:11px}.stat-card{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px;box-shadow:var(--shadow)}.stat-icon{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;font-weight:900;font-size:15px;background:#f1f0ff;color:#5148d8}.stat-icon.inc{background:#e9fbf1;color:#087a45}.stat-icon.out{background:#fff0ef;color:#b42318}.stat-icon.save{background:#eef8ff;color:#1672ae}.stat-icon.sub{background:#fff6e4;color:#9a6700}.stat-card span{display:block;color:var(--muted);font-size:8px;text-transform:uppercase;letter-spacing:.7px;font-weight:900}.stat-card b{display:block;font-size:17px;margin:4px 0 1px}.stat-card small{font-size:8px;color:#9aa2b4}
+.dash-main-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:13px;margin-top:13px}.dash-main-grid.second-row{grid-template-columns:1fr 1fr}.dash-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}.panel-head span{display:block;font-size:9px;color:var(--muted);margin-top:4px}.legend{display:flex;gap:10px!important;color:var(--muted)!important;font-size:8px!important}.legend span{display:flex;gap:4px;align-items:center}.legend i{width:7px;height:7px;border-radius:2px}.legend-in{background:#6f67ff}.legend-out{background:#dfe2eb}.cash-chart{height:170px;display:flex;align-items:end;gap:13px;padding:10px 4px 3px}.bar-col{height:100%;flex:1;display:flex;align-items:end;gap:4px}.bar-wrap{height:100%;display:flex;align-items:end;justify-content:center;width:100%;gap:4px}.bar-a,.bar-b{width:45%;border-radius:6px 6px 2px 2px}.bar-a{background:linear-gradient(180deg,#8f87ff,#6158ff)}.bar-b{background:#e5e7ef}.chart-labels{display:flex;justify-content:space-between;color:#a0a7b8;font-size:8px;padding:0 3px}
+.monitor-list{display:grid;gap:8px}.monitor-item{display:flex;gap:9px;padding:10px;border-radius:12px;background:#fafbff;border:1px solid #eef0f5}.monitor-item .mi{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-weight:900;background:#fff0ef;color:#b42318;flex:0 0 auto}.monitor-item.warn .mi{background:#fff5df;color:#9a6700}.monitor-item.ok .mi{background:#e8fbf1;color:#087a45}.monitor-item strong{display:block;font-size:10px}.monitor-item span{display:block;margin-top:3px;color:var(--muted);font-size:9px;line-height:1.35}
+.distribution{display:grid;gap:11px}.dist-row{display:grid;grid-template-columns:90px 1fr 59px;gap:9px;align-items:center}.dist-name{font-size:10px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.dist-track{height:8px;background:#eef0f5;border-radius:99px;overflow:hidden}.dist-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#6f67ff,#46c9f2)}.dist-value{text-align:right;font-size:9px;color:var(--muted)}
+.dash-bottom-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;margin-top:13px}.insight-v5{display:flex;gap:11px;align-items:flex-start;background:linear-gradient(135deg,#fff,#f1f0ff)}.mini-badge{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#eae8ff;color:#5148d8;flex:0 0 auto}.insight-v5 h3{margin-top:2px}.insight-v5 p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.45}.activity-row{padding:9px 0}
+@media(max-width:1000px){.dashboard-v5-top{grid-template-columns:1fr}.dash-main-grid,.dash-main-grid.second-row{grid-template-columns:1fr}.dash-bottom-grid{grid-template-columns:1fr 1fr}.dash-bottom-grid .insight-v5{grid-column:1/-1}}
+@media(max-width:650px){
+ .command-head{align-items:flex-start;flex-direction:column;gap:11px}.command-head h2{font-size:22px}.command-actions{width:100%}.command-actions .btn{flex:1}.net-value{font-size:37px}.stat-strip{grid-template-columns:1fr 1fr}.stat-card{padding:11px}.stat-card b{font-size:15px}.health-card{padding:16px}.health-main{margin-top:15px}.cash-chart{height:150px;gap:8px}.dash-bottom-grid{grid-template-columns:1fr}.dash-bottom-grid .insight-v5{grid-column:auto}.dash-panel{padding:14px}.dist-row{grid-template-columns:72px 1fr 55px}.legend{display:none!important}
+}
+
+
+/* ===== ELECTROCOCLÉ-INSPIRED DASHBOARD V6 ===== */
+:root{--ec-bg:#090d13;--ec-side:#090d13;--ec-panel:#101720;--ec-panel2:#0d141c;--ec-line:#23303d;--ec-text:#f5f7fa;--ec-muted:#9aa8b8;--ec-accent:#ffc400;--ec-green:#20c983;--ec-red:#ff6b67}
+body{background:var(--ec-bg)}
+.sidebar{background:#080c11;border-right:1px solid #222d38}
+.logo-mark{background:var(--ec-accent)!important;color:#0a0d12;box-shadow:none!important}
+.nav-title{color:#627080}.nav button{color:#aeb9c6}.nav button:hover{background:#151c25;color:#fff}.nav button.active{background:#1a222c;color:var(--ec-accent);box-shadow:none}
+.main{padding:29px 31px 42px;background:var(--ec-bg);max-width:none;color:var(--ec-text)}
+.topbar{margin-bottom:27px}.hello{gap:0}.avatar{display:none}.hello .eyebrow{display:none}.hello h1{font-size:32px;letter-spacing:-.9px;color:#fff}.month{background:#0f151d;color:#fff;border-color:#273440;box-shadow:none}
+.ec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:22px}.ec-head h2{font-size:27px;letter-spacing:-.6px;margin:0 0 4px;color:#fff}.ec-head p{margin:0;color:var(--ec-muted);font-size:14px}.ec-primary{background:var(--ec-accent);color:#0a0d12;border:0;border-radius:11px;padding:12px 17px;font-weight:850;font-size:13px}.ec-primary:hover{filter:brightness(1.05)}
+.ec-alert{display:none;margin:-5px 0 15px;padding:13px 15px;border:1px solid #4a3030;background:#171216;border-radius:12px;color:#fff}.ec-alert.show{display:flex;align-items:center;gap:10px}.ec-alert.warning{border-color:#4b4127;background:#17150e}.ec-alert .alert-dot{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#342024;color:#ff8e88;font-weight:900}.ec-alert.warning .alert-dot{background:#31280d;color:#ffd34e}.ec-alert strong{font-size:12px}.ec-alert span{font-size:10px;color:#aab4c0}
+.ec-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.ec-kpi{background:var(--ec-panel);border:1px solid var(--ec-line);border-radius:17px;padding:21px 21px 19px;min-height:128px}.ec-kpi-accent{border-color:#5d500e}.ec-kpi-label{color:#a9b7c6;font-size:14px}.ec-kpi-value{font-size:29px;font-weight:900;letter-spacing:-.7px;margin:17px 0 12px;color:#fff}.ec-kpi-sub{color:#92a1b2;font-size:12px}.ec-kpi-accent .ec-kpi-value{color:var(--ec-accent)}
+.ec-main-grid{display:grid;grid-template-columns:1.28fr .72fr;gap:15px;margin-top:16px}.ec-panel{background:var(--ec-panel);border:1px solid var(--ec-line);border-radius:17px;padding:20px}.ec-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:16px}.ec-panel-head h3{margin:0 0 5px;font-size:16px;color:#fff;letter-spacing:-.15px}.ec-panel-head>div>span{display:block;color:#93a2b2;font-size:11px}.ec-outline{background:transparent;border:1px solid #2a3946;color:#eef2f6;border-radius:11px;padding:10px 13px;font-size:11px;font-weight:800}.ec-outline:hover{background:#141c25}
+.activity{display:grid;gap:2px}.activity-row{display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid #202b35}.activity-row:last-child{border-bottom:0}.activity-icon{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:#131d27;color:#cbd6e1}.activity-desc{font-size:12px;font-weight:800;color:#fff}.activity-cat{font-size:10px;color:#82909e;margin-top:2px}.activity-amt{font-size:12px;font-weight:900;color:#fff}
+.ec-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.ec-quick{min-height:108px;background:#0d141c;border:1px solid #263541;border-radius:14px;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:11px;font-size:11px}.ec-quick:hover{background:#131c25;border-color:#3a4a59}.ec-quick b{font-size:22px;font-weight:500}.ec-quick span{font-weight:700}
+.ec-lower-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}.ec-status{font-size:10px;font-weight:900;border:1px solid #315f4a;background:#10251c;color:#42d99a;border-radius:999px;padding:6px 9px}.ec-health-row{display:flex;align-items:center;gap:16px;margin-top:2px}.ec-health-number{display:flex;align-items:baseline;gap:2px;padding:4px 0}.ec-health-number b{font-size:40px;line-height:1;font-weight:900;color:#fff}.ec-health-number small{color:#758392;font-size:10px}.ec-health-copy strong{font-size:13px}.ec-health-copy p{font-size:10px;color:#8d9aa8;line-height:1.45;margin:5px 0 0}.ec-health-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:19px}.ec-health-metrics div{background:#0d141c;border:1px solid #202d38;border-radius:10px;padding:10px}.ec-health-metrics span{display:block;color:#7f8d9c;font-size:8px}.ec-health-metrics b{display:block;margin-top:4px;color:#fff;font-size:12px}
+.ec-budget{display:grid;gap:13px}.ec-budget .budget-line{margin:0}.ec-budget .budget-head{display:flex;justify-content:space-between;color:#d8dee5;font-size:10px;margin-bottom:6px}.ec-budget .budget-head span:last-child{color:#8693a0}.ec-budget .track{height:7px;background:#1b2630}.ec-budget .fill{background:var(--ec-accent)}
+.ec-alert-panel{margin-top:15px}.ec-monitor{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.ec-monitor .monitor-item{display:flex;gap:9px;align-items:flex-start;padding:11px;background:#0d141c;border:1px solid #202d38;border-radius:12px}.ec-monitor .mi{width:27px;height:27px;border-radius:8px;display:grid;place-items:center;background:#2d1718;color:#ff837d;font-size:12px;flex:0 0 auto}.ec-monitor .monitor-item.warn .mi{background:#30270f;color:#ffd34e}.ec-monitor .monitor-item.ok .mi{background:#10271d;color:#39d98d}.ec-monitor strong{font-size:10px;color:#fff}.ec-monitor span{display:block;font-size:9px;color:#8997a6;line-height:1.35;margin-top:3px}
+@media(max-width:1000px){.ec-kpis{grid-template-columns:1fr 1fr}.ec-main-grid,.ec-lower-grid{grid-template-columns:1fr}.ec-monitor{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){
+ body{padding-bottom:72px}.main{padding:17px 12px 24px}.topbar{margin-bottom:16px}.hello h1{font-size:26px}.month{font-size:11px}.ec-head{align-items:flex-start;flex-direction:column}.ec-head h2{font-size:24px}.ec-head p{font-size:11px}.ec-primary{width:100%}.ec-kpis{grid-template-columns:1fr 1fr;gap:9px}.ec-kpi{padding:14px;min-height:110px;border-radius:13px}.ec-kpi-label{font-size:11px}.ec-kpi-value{font-size:21px;margin:12px 0 7px}.ec-kpi-sub{font-size:9px}.ec-panel{padding:15px;border-radius:14px}.ec-quick-grid{gap:8px}.ec-quick{min-height:90px}.ec-health-metrics{grid-template-columns:1fr 1fr}.ec-monitor{grid-template-columns:1fr}.ec-panel-head .ec-outline{padding:8px 10px;font-size:9px}
+}
+
+
+/* Floating financial control */
+.control-bubble{position:fixed;right:24px;bottom:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ffc400,#ffe16d);color:#0a0d12;display:grid;place-items:center;z-index:70;box-shadow:0 10px 32px #0005;border:3px solid #090d13;cursor:pointer}.bubble-icon{font-weight:950;font-size:22px}.bubble-badge{display:none;position:absolute;right:-2px;top:-3px;min-width:20px;height:20px;padding:0 5px;place-items:center;background:#ff4d4d;color:white;border-radius:99px;font-size:9px;font-weight:900;border:2px solid #090d13}.alert-center{position:fixed;right:24px;bottom:90px;width:350px;max-width:calc(100vw - 30px);background:#101720;border:1px solid #293745;border-radius:16px;z-index:69;display:none;box-shadow:0 25px 70px #0007;color:#fff;overflow:hidden}.alert-center.open{display:block}.alert-center-head{display:flex;justify-content:space-between;align-items:center;padding:15px 16px;border-bottom:1px solid #25313c}.alert-center-head b{display:block;font-size:12px}.alert-center-head small{display:block;color:#7f8d9d;font-size:9px;margin-top:3px}.alert-center-head button{border:0;background:#1a232d;color:#fff;border-radius:8px;width:27px;height:27px}.alert-center-body{padding:12px}.alert-empty{padding:25px;text-align:center;color:#7f8d9d;font-size:10px}.center-alert{display:flex;gap:10px;padding:12px;border-radius:12px;background:#171b1f;border:1px solid #3e2d2d}.center-alert.warning{border-color:#4e4325;background:#181711}.center-alert .center-icon{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:#322022;color:#ff8580;font-weight:900;flex:0 0 auto}.center-alert.warning .center-icon{background:#30280f;color:#ffd34e}.center-alert b{display:block;font-size:11px}.center-alert span{display:block;color:#9ca8b5;font-size:9px;line-height:1.35;margin-top:3px}.center-alert small{display:block;color:#667482;font-size:8px;margin-top:6px}.alert-center-actions{display:flex;gap:7px;padding:12px;border-top:1px solid #25313c}.alert-center-actions .btn{flex:1}
+@media(max-width:650px){.control-bubble{right:15px;bottom:83px;width:52px;height:52px}.alert-center{right:10px;bottom:143px}.alert-center-actions{flex-direction:column}}
+
+
+/* Receipt scanner */
+.scan-modal{position:fixed;inset:0;background:#05080dcc;display:none;place-items:center;padding:18px;z-index:55}.scan-modal.open{display:grid}.scan-box{width:min(560px,100%);background:#101720;border:1px solid #2a3946;border-radius:20px;padding:20px;color:#fff;box-shadow:0 30px 100px #0008}.scan-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.scan-head h2{margin:2px 0 5px;font-size:20px}.scan-head p{margin:0;color:#93a0ae;font-size:10px;line-height:1.45}.scan-drop{margin-top:18px;min-height:180px;border:1px dashed #405160;border-radius:16px;background:#0c131b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px;cursor:pointer}.scan-drop:hover{border-color:#ffc400;background:#111a23}.scan-camera{width:50px;height:50px;border-radius:14px;background:#1b2430;color:#ffc400;display:grid;place-items:center;font-size:22px}.scan-drop strong{font-size:12px}.scan-drop span{font-size:9px;color:#7f8d9b}.receipt-preview{max-height:260px;max-width:100%;margin:15px auto 0;display:block;border-radius:13px;border:1px solid #293844}.scan-progress{margin-top:15px}.scan-progress-top{display:flex;justify-content:space-between;font-size:10px;color:#cbd5df}.scan-track{height:7px;border-radius:99px;background:#1d2832;overflow:hidden;margin-top:7px}.scan-track div{height:100%;width:0;background:linear-gradient(90deg,#ffc400,#6bdcff);border-radius:99px;transition:width .2s}.scan-result{margin-top:15px;padding:14px;border-radius:14px;background:#0b1219;border:1px solid #273541}.scan-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}.scan-result-item{padding:10px;border-radius:10px;background:#111a23}.scan-result-item span{display:block;font-size:8px;color:#83909d}.scan-result-item b{display:block;font-size:13px;margin-top:3px}.scan-ok{margin-top:10px;color:#53dd9f;font-size:9px}.scan-warn{margin-top:10px;color:#ffd34e;font-size:9px}.scan-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:14px}
+@media(max-width:650px){.scan-box{padding:16px;border-radius:17px}.scan-head h2{font-size:18px}.scan-drop{min-height:170px}}
+
+
+/* Tigre Finanzas */
+.tigre-bubble{position:fixed;right:24px;bottom:92px;width:50px;height:50px;border-radius:50%;background:#131c26;border:2px solid #ffc400;color:#ffc400;display:grid;place-items:center;z-index:71;box-shadow:0 10px 28px #0006;cursor:pointer;font-size:23px}.tigre-bubble:hover{background:#1b2530}
+.advisor-modal{position:fixed;inset:0;background:#05080ddd;display:none;place-items:center;padding:18px;z-index:58}.advisor-modal.open{display:grid}.advisor-box{width:min(620px,100%);background:#101720;border:1px solid #2b3947;border-radius:20px;padding:20px;color:#fff;box-shadow:0 35px 110px #0009}.advisor-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.advisor-head h2{margin:2px 0 5px;font-size:21px}.advisor-head p{margin:0;color:#8f9dac;font-size:10px;line-height:1.45}.advisor-camera-wrap{position:relative;margin-top:16px;min-height:260px;background:#091017;border:1px solid #263642;border-radius:15px;overflow:hidden;display:grid;place-items:center}.advisor-video,.advisor-image{width:100%;height:100%;max-height:330px;object-fit:contain;background:#071019}.advisor-canvas{display:none}.advisor-placeholder{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:7px;text-align:center;padding:20px;background:linear-gradient(180deg,#0b121a,#091017)}.advisor-placeholder strong{font-size:12px}.advisor-placeholder span{font-size:9px;color:#7f8c99}.advisor-camera-icon{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:#151f29;color:#ffc400;font-size:23px}.advisor-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.advisor-progress{margin-top:13px}.advisor-progress>div:first-child{display:flex;justify-content:space-between;color:#cbd4de;font-size:9px}.advisor-progress .scan-track{margin-top:6px}
+.advisor-result{margin-top:14px;border:1px solid #283743;background:#0b1219;border-radius:14px;padding:14px}.advisor-result-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.advisor-product{font-size:13px;font-weight:900}.advisor-price{font-size:23px;font-weight:900;color:#ffc400}.advisor-answer{margin-top:12px;padding:12px;border-radius:11px;border:1px solid #283743;background:#101922}.advisor-answer.good{border-color:#245a43;background:#0d2118}.advisor-answer.warn{border-color:#63531a;background:#1b180e}.advisor-answer.bad{border-color:#65302f;background:#201214}.advisor-answer strong{display:block;font-size:12px}.advisor-answer span{display:block;color:#aab4bf;font-size:10px;line-height:1.45;margin-top:4px}.advisor-data{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.advisor-data div{background:#111a23;border:1px solid #202e39;border-radius:9px;padding:9px}.advisor-data small{display:block;color:#7f8d9b;font-size:8px}.advisor-data b{display:block;margin-top:3px;font-size:11px}.advisor-buttons{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}.advisor-buttons .btn{flex:1}.advisor-foot{display:flex;justify-content:flex-end;gap:7px;margin-top:12px}
+@media(max-width:650px){.tigre-bubble{right:15px;bottom:139px;width:48px;height:48px}.advisor-box{padding:15px;border-radius:17px}.advisor-camera-wrap{min-height:235px}.advisor-data{grid-template-columns:1fr 1fr 1fr}.advisor-foot{justify-content:stretch}.advisor-foot .btn{flex:1}}
+
+
+/* Bank import */
+.bank-modal{position:fixed;inset:0;background:#05080ddd;display:none;place-items:center;padding:18px;z-index:57}.bank-modal.open{display:grid}.bank-box{width:min(620px,100%);background:#101720;border:1px solid #2b3947;border-radius:20px;padding:20px;color:#fff;box-shadow:0 35px 110px #0009}.bank-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.bank-head h2{font-size:19px;margin:2px 0 5px}.bank-head p{font-size:10px;color:#8d9aa8;line-height:1.45;margin:0}.bank-drop{margin-top:16px;min-height:155px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;border:1px dashed #425362;border-radius:15px;background:#0b1219;cursor:pointer}.bank-drop:hover{border-color:#ffc400;background:#101a22}.bank-icon{font-size:28px}.bank-drop strong{font-size:12px}.bank-drop span{font-size:9px;color:#7f8c99}.bank-preview{margin-top:14px;border:1px solid #253440;background:#0b1219;border-radius:13px;overflow:auto;max-height:250px;padding:10px}.bank-row{display:grid;grid-template-columns:82px 1fr 82px 95px;gap:8px;padding:8px 5px;border-bottom:1px solid #1e2a33;font-size:9px}.bank-row.head{color:#8997a6;font-weight:900;text-transform:uppercase}.bank-row:last-child{border-bottom:0}.bank-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:12px}
+@media(max-width:650px){.bank-box{padding:15px}.bank-row{grid-template-columns:68px 1fr 68px 80px;font-size:8px}}
+
+
+.advisor-purpose{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:11px}.advisor-purpose>span{font-size:9px;color:#8794a1;font-weight:700;margin-right:3px}.purpose-btn{border:1px solid #2a3946;background:#0d141c;color:#b7c1cb;border-radius:10px;padding:8px 10px;font-size:9px;font-weight:800}.purpose-btn.active{border-color:#ffc400;background:#271f05;color:#ffd449}.advisor-answer.neutral{border-color:#445362;background:#101820}
+
+
+/* Notification permission + live advisor */
+.notif-welcome{position:fixed;inset:0;display:none;place-items:center;padding:18px;background:#05080de8;z-index:90}.notif-welcome.open{display:grid}.notif-card{width:min(440px,100%);background:#101720;border:1px solid #2a3947;border-radius:20px;padding:24px;color:#fff;box-shadow:0 35px 100px #0009;text-align:center}.notif-symbol{width:58px;height:58px;border-radius:17px;display:grid;place-items:center;background:#2a2207;color:#ffd447;margin:0 auto 13px;font-size:25px}.notif-card h2{margin:2px 0 6px;font-size:21px}.notif-card>p{color:#95a1ae;font-size:10px;line-height:1.5;margin:0}.notif-example{margin:14px 0;text-align:left;border:1px solid #2b3947;background:#0c131b;border-radius:12px;padding:11px}.notif-example b{display:block;color:#ffd34e;font-size:9px}.notif-example span{display:block;color:#c4ccd4;font-size:9px;line-height:1.4;margin-top:4px}.notif-actions{display:flex;gap:8px}.notif-actions .btn{flex:1}.advisor-live-status{display:flex;align-items:center;gap:7px;margin-top:9px;padding:9px 11px;border:1px solid #2d4f43;background:#0d2118;border-radius:10px;color:#72e5b0;font-size:9px}.advisor-live-status b{font-size:9px}.advisor-live-status span:last-child{color:#9ab7a8}.live-pulse{width:7px;height:7px;border-radius:50%;background:#28d58b;box-shadow:0 0 0 5px #28d58b1c;animation:livepulse 1.4s infinite}@keyframes livepulse{50%{transform:scale(1.25);opacity:.6}}
+
+
+/* ===== TIGRE FINANZAS V2 ===== */
+.advisor-camera-wrap{position:relative;margin-top:16px;min-height:270px;background:#071019;border:1px solid #2a3947;border-radius:16px;overflow:hidden;display:grid;place-items:center}.advisor-video{width:100%;height:100%;min-height:270px;max-height:360px;object-fit:cover;background:#050a10}.advisor-image{width:100%;height:100%;min-height:270px;max-height:360px;object-fit:contain;background:#050a10}.advisor-live-badge{position:absolute;right:11px;top:11px;padding:5px 8px;border-radius:99px;background:#10261c;color:#58e0a1;border:1px solid #2d5b45;font-size:8px;font-weight:900;letter-spacing:.5px}.advisor-live-badge i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#2fe092;margin-right:4px;box-shadow:0 0 0 4px #2fe09220}
+.advisor-live-status{display:flex;align-items:center;gap:7px;margin-top:9px;padding:9px 11px;border:1px solid #30483e;background:#0d2118;border-radius:10px;color:#72e5b0;font-size:9px}.advisor-live-status b{font-size:9px}.advisor-live-status>span:last-child{color:#9ab7a8}.live-pulse{width:7px;height:7px;border-radius:50%;background:#28d58b;box-shadow:0 0 0 5px #28d58b1c;animation:livepulse 1.4s infinite}@keyframes livepulse{50%{transform:scale(1.25);opacity:.6}}
+.advisor-data{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.advisor-data div{background:#111a23;border:1px solid #202e39;border-radius:9px;padding:9px}.advisor-data small{display:block;color:#7f8d9b;font-size:8px}.advisor-data b{display:block;margin-top:3px;font-size:11px}
+.confidence-row{display:flex;align-items:center;gap:8px;margin-top:9px;color:#81909e;font-size:8px}.confidence-track{height:5px;flex:1;background:#1d2831;border-radius:99px;overflow:hidden}.confidence-track>i{display:block;height:100%;background:linear-gradient(90deg,#ef7770,#ffd34f,#3ad796);border-radius:99px}
+.advisor-answer small{display:block;color:#758392;font-size:8px;margin-top:6px}.advisor-answer.good{border-color:#245a43!important;background:#0d2118!important}.advisor-answer.warn{border-color:#63531a!important;background:#1b180e!important}.advisor-answer.bad{border-color:#65302f!important;background:#201214!important}.advisor-answer.neutral{border-color:#3a4855!important;background:#101820!important}
+@media(max-width:650px){.advisor-camera-wrap{min-height:245px}.advisor-video,.advisor-image{min-height:245px}.advisor-data{grid-template-columns:1fr 1fr}.advisor-actions .btn{font-size:10px;padding:9px 10px}}
+
+
+/* ===== TIGRE FINANZAS V3: AVATAR + VOZ ===== */
+.tigre-face{position:relative;width:56px;height:56px;flex:0 0 auto}.mini-avatar{width:31px;height:31px}.advisor-avatar{width:55px;height:55px}.tigre-head-wrap{display:flex;align-items:center;gap:11px}.tigre-face .face-main{position:absolute;left:8%;top:19%;width:84%;height:70%;border-radius:48% 48% 44% 44%;background:linear-gradient(135deg,#ffc933 0%,#f6a600 100%);border:2px solid #17130a;box-shadow:inset 0 -3px 0 #da8700}.tigre-face .ear{position:absolute;top:7%;width:31%;height:31%;background:#f6aa08;border:2px solid #17130a;transform:rotate(45deg);z-index:0}.tigre-face .ear.l{left:6%;border-radius:7px 4px 4px 4px}.tigre-face .ear.r{right:6%;border-radius:4px 7px 4px 4px}.tigre-face .eye{position:absolute;top:41%;width:11%;height:13%;border-radius:50%;background:#111;z-index:4}.tigre-face .eye.e1{left:29%}.tigre-face .eye.e2{right:29%}.tigre-face .muzzle{position:absolute;left:29%;top:52%;width:42%;height:27%;border-radius:50%;background:#ffe6b5;z-index:3}.tigre-face .nose{position:absolute;left:44%;top:57%;width:12%;height:9%;border-radius:50% 50% 45% 45%;background:#3b210d;z-index:5}.tigre-face .mouth{position:absolute;left:44%;top:67%;width:12%;height:7%;border-bottom:2px solid #3b210d;border-radius:0 0 50% 50%;z-index:6}.tigre-face .mouth:before,.tigre-face .mouth:after{content:"";position:absolute;top:-31%;width:2px;height:8px;background:#2a1710}.tigre-face .mouth:before{left:28%}.tigre-face .mouth:after{right:28%}.tigre-face:after{content:"";position:absolute;left:38%;top:38%;width:7%;height:4%;background:#5b2e0b;box-shadow:7px 1px 0 #5b2e0b;border-radius:1px;opacity:.7}.tigre-face.speaking .mouth{animation:tigreTalk .18s infinite alternate}.tigre-face.speaking .eye{animation:tigreBlink 3.2s infinite}.tigre-face.speaking{filter:drop-shadow(0 0 8px #ffc40033)}.tigre-bubble.speaking{box-shadow:0 0 0 5px #ffc40022,0 10px 28px #0006}.tigre-bubble-status{position:absolute;inset:auto -2px -2px;width:8px;height:8px;border-radius:50%;background:#34d399;border:2px solid #080c11;display:none}.tigre-bubble.speaking .tigre-bubble-status{display:block;animation:tigreDot .8s infinite alternate}.advisor-avatar.speaking{transform:translateY(-1px) scale(1.02)}@keyframes tigreTalk{from{transform:scaleY(.7)}to{transform:scaleY(1.5)}}@keyframes tigreBlink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.1)}}@keyframes tigreDot{to{transform:scale(1.35);opacity:.55}}
+.advisor-head .x{flex:0 0 auto}.advisor-buttons .btn{min-width:115px}
+@media(max-width:650px){.tigre-head-wrap{gap:9px}.advisor-avatar{width:48px;height:48px}.advisor-buttons .btn{min-width:0}.tigre-bubble{bottom:139px}}
+
+
+/* ===== MOBILE NAV V2: SIDE RAIL ===== */
+@media(max-width:650px){
+  body{padding:0;overflow-x:hidden}
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;right:auto;width:64px;height:100vh;
+    padding:10px 5px;background:#080c11;border-right:1px solid #222d38;
+    box-shadow:8px 0 25px #0004;z-index:80;overflow-y:auto;overflow-x:hidden
+  }
+  .logo{display:flex;justify-content:center;padding:4px 0 14px}.logo-text,.nav-title{display:none}.logo-mark{margin:0;width:42px;height:42px}
+  .nav{display:flex;flex-direction:column;gap:4px}
+  .nav button{
+    min-height:47px;padding:5px 2px;margin:0;border-radius:9px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+    text-align:center;font-size:6.5px;line-height:1.0
+  }
+  .nav button.active{background:#1a222c;color:#ffc400;box-shadow:none}
+  .nav-ico{width:auto;font-size:15px;line-height:1}
+  .nav-label{display:block;white-space:normal}
+  .nav button:nth-child(1) .nav-label{font-size:0}.nav button:nth-child(1) .nav-label:after{content:"Resumen";font-size:7.5px}
+  .nav button:nth-child(2) .nav-label{font-size:0}.nav button:nth-child(2) .nav-label:after{content:"Movimientos";font-size:7.5px}
+  .nav button:nth-child(3) .nav-label{font-size:0}.nav button:nth-child(3) .nav-label:after{content:"Presupuesto";font-size:7.5px}
+  .nav button:nth-child(4) .nav-label{font-size:0}.nav button:nth-child(4) .nav-label:after{content:"Ahorro";font-size:7.5px}
+  .nav button:nth-child(5) .nav-label{font-size:0}.nav button:nth-child(5) .nav-label:after{content:"Deudas";font-size:7.5px}
+  .nav button:nth-child(6) .nav-label{font-size:0}.nav button:nth-child(6) .nav-label:after{content:"Estadísticas";font-size:7.5px}
+  .nav button:nth-child(7) .nav-label{font-size:0}.nav button:nth-child(7) .nav-label:after{content:"Config.";font-size:7.5px}
+  .nav button:nth-child(8) .nav-label{font-size:0}.nav button:nth-child(8) .nav-label:after{content:"Tigre";font-size:7.5px}
+  .main{margin-left:64px;width:calc(100% - 64px);padding:14px 10px 24px}
+  .topbar{margin-bottom:14px}
+  .ec-head{align-items:flex-start;flex-direction:column}
+  .ec-primary{width:auto}
+  .tigre-bubble{right:9px;bottom:70px}
+  .control-bubble{right:10px;bottom:12px}
+  .alert-center{right:8px;bottom:72px}
+}
+
+
+.install-banner{position:fixed;left:calc(258px + 30px);right:30px;top:14px;max-width:620px;margin:auto;z-index:75;display:none;align-items:center;gap:10px;padding:9px 10px;background:#101720;border:1px solid #2b3947;border-radius:13px;box-shadow:0 16px 45px #0007;color:#fff}.install-banner.show{display:flex}.install-app-icon{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;background:#ffc400;color:#090d13;font-weight:950}.install-copy{flex:1}.install-copy b{display:block;font-size:10px}.install-copy span{display:block;color:#8d9baa;font-size:8px;margin-top:2px}.install-close{border:0;background:#1b2530;color:#b4bfca;border-radius:8px;width:25px;height:25px}
+@media(max-width:820px){.install-banner{left:100px;right:18px}}
+@media(max-width:650px){.install-banner{left:74px;right:8px;top:9px}.install-copy span{display:none}.install-banner .btn{padding:8px 9px;font-size:9px}}
+
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo"><div class="logo-mark">₿</div><div class="logo-text">Rider Finanzas<small>Finanzas personales</small></div></div>
+  <div class="nav-title">Menú principal</div>
+  <nav class="nav" id="nav">
+    <button class="active" data-page="dashboard"><span class="nav-ico">⌂</span><span class="nav-label">Resumen</span></button>
+    <button data-page="movimientos"><span class="nav-ico">↕</span><span class="nav-label">Movimientos</span></button>
+    <button data-page="presupuesto"><span class="nav-ico">▦</span><span class="nav-label">Presupuesto</span></button>
+    <button data-page="ahorro"><span class="nav-ico">◎</span><span class="nav-label">Ahorro</span></button>
+    <button data-page="deudas"><span class="nav-ico">◈</span><span class="nav-label">Deudas</span></button>
+    <button data-page="estadisticas"><span class="nav-ico">◒</span><span class="nav-label">Estadísticas</span></button>
+    <button data-page="config"><span class="nav-ico">⚙</span><span class="nav-label">Configuración</span></button><button type="button" onclick="openAdvisor()"><span class="nav-ico">✦</span><span class="nav-label">Tigre Finanzas</span></button>
+  </nav>
+</aside>
+
+<main class="main">
+<div class="topbar">
+  <div class="hello"><div class="avatar" id="avatar">R</div><div><div class="eyebrow">Bienvenido de nuevo</div><h1 id="pageTitle">Mi Dashboard</h1></div></div>
+  <div class="top-actions"><input id="monthPicker" class="month" type="month"></div>
+</div>
+
+<section class="page active" id="dashboard">
+  <div class="ec-head">
+    <div>
+      <h2>Resumen</h2>
+      <p>Control de tu sueldo, gastos y ahorro.</p>
+    </div>
+    <button class="ec-primary" onclick="openModal('expense')">＋ Registrar gasto</button>
+  </div>
+
+  <div id="alertStrip" class="ec-alert"></div>
+
+  <div class="ec-kpis">
+    <div class="ec-kpi">
+      <div class="ec-kpi-label">Ingresos</div>
+      <div class="ec-kpi-value" id="kIncome">$0.00</div>
+      <div class="ec-kpi-sub">Dinero que ha entrado</div>
+    </div>
+    <div class="ec-kpi">
+      <div class="ec-kpi-label">Gastos</div>
+      <div class="ec-kpi-value" id="kExpense">$0.00</div>
+      <div class="ec-kpi-sub">Dinero utilizado</div>
+    </div>
+    <div class="ec-kpi">
+      <div class="ec-kpi-label">Ahorro</div>
+      <div class="ec-kpi-value" id="kSavings">$0.00</div>
+      <div class="ec-kpi-sub">Dinero separado</div>
+    </div>
+    <div class="ec-kpi ec-kpi-accent">
+      <div class="ec-kpi-label">Disponible</div>
+      <div class="ec-kpi-value" id="heroBalance">$0.00</div>
+      <div class="ec-kpi-sub">Saldo actual del mes</div>
+    </div>
+  </div>
+
+  <div class="ec-main-grid">
+    <div class="ec-panel activity-panel">
+      <div class="ec-panel-head">
+        <div>
+          <h3>Actividad reciente</h3>
+          <span>Últimos movimientos registrados.</span>
+        </div>
+        <button class="ec-outline" onclick="openPage('movimientos')">Ver historial</button>
+      </div>
+      <div id="recent"></div>
+    </div>
+
+    <div class="ec-panel quick-panel">
+      <div class="ec-panel-head">
+        <div>
+          <h3>Acciones rápidas</h3>
+          <span>Lo más usado.</span>
+        </div>
+      </div>
+
+      <div class="ec-quick-grid">
+        <button class="ec-quick" onclick="openModal('income')"><b>↗</b><span>Registrar ingreso</span></button>
+        <button class="ec-quick" onclick="openModal('expense')"><b>↘</b><span>Registrar gasto</span></button>
+        <button class="ec-quick" onclick="openModal('saving')"><b>◎</b><span>Registrar ahorro</span></button>
+        <button class="ec-quick" onclick="openPage('presupuesto')"><b>▤</b><span>Ver presupuesto</span></button><button class="ec-quick" onclick="openScanner()"><b>▣</b><span>Escanear compra</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ec-lower-grid">
+    <div class="ec-panel">
+      <div class="ec-panel-head">
+        <div>
+          <h3>Estado financiero</h3>
+          <span>Lectura rápida de tu mes.</span>
+        </div>
+        <span id="status" class="ec-status">En orden</span>
+      </div>
+
+      <div class="ec-health-row">
+        <div class="ec-health-number"><b id="score">100</b><small>/100</small></div>
+        <div class="ec-health-copy">
+          <strong id="healthHeadline">Todo bajo control</strong>
+          <p id="healthText">Configura tu sueldo y empieza a registrar tus movimientos.</p>
+        </div>
+      </div>
+
+      <div class="ec-health-metrics">
+        <div><span>Gastos</span><b id="expenseRatio">0%</b></div>
+        <div><span>Ahorro</span><b id="saveRatio">0%</b></div>
+        <div><span>Suscripciones</span><b id="subscriptionRatio">0%</b></div>
+        <div><span>Disponible</span><b id="remainingPercent">100%</b></div>
+      </div>
+    </div>
+
+    <div class="ec-panel">
+      <div class="ec-panel-head">
+        <div>
+          <h3>Control del mes</h3>
+          <span>Presupuesto y alertas.</span>
+        </div>
+        <button class="ec-outline" onclick="openPage('presupuesto')">Configurar</button>
+      </div>
+      <div id="budgetDash" class="ec-budget"></div>
+    </div>
+  </div>
+
+  <div class="ec-panel ec-alert-panel">
+    <div class="ec-panel-head">
+      <div>
+        <h3>Alertas</h3>
+        <span>Avisos automáticos cuando tu bolsillo necesita atención.</span>
+      </div>
+      <button class="ec-outline" onclick="openPage('estadisticas')">Ver análisis</button>
+    </div>
+    <div id="dashboardAlerts" class="ec-monitor"></div>
+  </div>
+</section>
+
+<section class="page" id="movimientos">
+  <div class="card-main"><div class="section-head"><h2>Movimientos</h2><div class="actions"><button class="btn btn-primary" onclick="openModal()">＋ Agregar</button><button class="btn btn-soft" onclick="openBankImport()">🏦 Importar banco</button><button class="btn btn-soft" onclick="exportData()">Exportar</button><label class="btn btn-soft">Importar<input id="importFile" type="file" accept=".json" hidden></label></div></div><div class="table-wrap" id="movementTable"></div></div>
+</section>
+
+<section class="page" id="presupuesto">
+  <div class="card-main"><div class="section-head"><h2>Presupuesto mensual</h2><button class="btn btn-primary" onclick="saveBudgets()">Guardar cambios</button></div><div class="form-grid" id="budgetForm"></div></div>
+</section>
+
+<section class="page" id="ahorro">
+  <div class="dashboard-grid"><div class="card-main"><div class="section-head"><h2>Metas de ahorro</h2><button class="btn btn-primary" onclick="addGoal()">＋ Nueva meta</button></div><div id="goals"></div></div><div class="panel"><h2>Resumen</h2><div class="money" id="goalTotal" style="margin-top:15px">$0.00</div><div class="sub">Objetivo total</div><div class="money green" id="goalSaved" style="margin-top:20px">$0.00</div><div class="sub">Ahorrado</div></div></div>
+</section>
+
+<section class="page" id="deudas">
+  <div class="card-main"><div class="section-head"><h2>Deudas y cuotas</h2><button class="btn btn-primary" onclick="addDebt()">＋ Nueva deuda</button></div><div class="table-wrap" id="debts"></div></div>
+</section>
+
+<section class="page" id="estadisticas">
+  <div class="dashboard-grid"><div class="panel"><div class="panel-head"><div><h2>Gastos por categoría</h2><div class="sub">Distribución del mes seleccionado</div></div></div><div id="stats"></div></div><div class="panel"><h2>Resumen del mes</h2><div id="summary" style="margin-top:15px"></div></div></div>
+</section>
+
+<section class="page" id="config">
+  <div class="dashboard-grid"><div class="card-main"><div class="section-head"><h2>Configuración</h2></div><form id="configForm" class="form-grid"><div class="field"><label>Nombre</label><input id="cfgName"></div><div class="field"><label>Sueldo mensual</label><input id="cfgSalary" type="number" min="0" step="0.01"></div><div class="field"><label>Moneda</label><select id="cfgCurrency"><option value="$">$ USD</option><option value="B/.">B/. PAB</option><option value="€">€ EUR</option></select></div><div class="field" style="align-self:end"><button class="btn btn-primary">Guardar configuración</button></div></form></div><div class="panel"><h2>Respaldo</h2><p style="color:var(--muted);font-size:12px;line-height:1.6">Exporta tus datos para guardarlos o llevarlos a otro dispositivo.</p><button class="btn btn-soft" onclick="exportData()">Descargar respaldo</button><button class="btn btn-danger" style="margin-left:6px" onclick="resetAll()">Borrar datos</button>
+</div>
+<div style="margin-top:18px;padding-top:15px;border-top:1px solid #23303d">
+  <b style="font-size:11px">Cámara y notificaciones</b>
+  <p style="font-size:10px;color:#8997a6;line-height:1.5;margin:6px 0">Para usar cámara, micrófono y notificaciones en PC, abre la app con <b>INICIAR_RIDER_FINANZAS.bat</b>. Eso la carga en <b>http://localhost:8787</b>.</p>
+</div>
+
+<div style="margin-top:18px;padding-top:15px;border-top:1px solid #23303d">
+  <b style="font-size:11px">Alertas inteligentes</b>
+  <div class="form-grid" style="margin-top:10px">
+    <div class="field"><label>Alerta cuando quede menos de</label><input id="cfgThreshold" type="number" min="1" max="90" step="1"></div>
+    <div class="field"><label>Alerta crítica cuando quede menos de</label><input id="cfgCritical" type="number" min="1" max="50" step="1"></div>
+    <label style="display:flex;gap:8px;align-items:center;font-size:10px"><input id="cfgSound" type="checkbox"> Sonido</label>
+    <label style="display:flex;gap:8px;align-items:center;font-size:10px"><input id="cfgBrowser" type="checkbox"> Notificación del navegador</label>
+    <label style="display:flex;gap:8px;align-items:center;font-size:10px"><input id="cfgTigreVoice" type="checkbox"> Tigre habla sus respuestas</label>
+  </div>
+</div>
+</div>
+</section>
+</main>
+</div>
+
+
+
+
+
+<div class="notif-welcome" id="notifWelcome">
+  <div class="notif-card">
+    <div class="notif-symbol">🔔</div>
+    <div class="tiny-label">RIDER FINANZAS</div>
+    <h2>Activa tus alertas</h2>
+    <p>Te avisaré cuando tu dinero disponible baje de los límites que hayas configurado.</p>
+    <div class="notif-example"><b>Ejemplo</b><span>“Oe, brother: solo te quedan $50.00. Controla tus gastos.”</span></div>
+    <div class="notif-actions"><button class="btn btn-soft" onclick="dismissNotifWelcome()">Ahora no</button><button class="btn btn-primary" onclick="enableNotifications()">🔔 Permitir notificaciones</button></div>
+  </div>
+</div>
+
+<div class="bank-modal" id="bankModal">
+  <div class="bank-box">
+    <div class="bank-head"><div><div class="tiny-label">IMPORTACIÓN BANCARIA</div><h2>Traer movimientos a Rider Finanzas</h2><p>Selecciona un archivo CSV u OFX que hayas exportado de tu banca. Rider intenta reconocer el monto y clasificar el gasto.</p></div><button class="x" onclick="closeBankImport()">×</button></div>
+    <label class="bank-drop"><input id="bankFile" type="file" accept=".csv,.ofx,.qfx,.txt" hidden><div class="bank-icon">🏦</div><strong>Seleccionar archivo bancario</strong><span>CSV / OFX / QFX</span></label>
+    <div id="bankPreview" class="bank-preview" style="display:none"></div>
+    <div class="bank-actions"><button class="btn btn-soft" onclick="closeBankImport()">Cerrar</button><button class="btn btn-primary" id="bankImportBtn" style="display:none" onclick="importBankRows()">Importar movimientos</button></div>
+  </div>
+</div>
+
+<div class="advisor-modal" id="advisorModal">
+  <div class="advisor-box">
+    <div class="advisor-head">
+      <div class="tigre-head-wrap">
+        <div class="tigre-face advisor-avatar" id="tigreAvatar" aria-hidden="true">
+          <span class="ear l"></span><span class="ear r"></span>
+          <span class="face-main"></span><span class="eye e1"></span><span class="eye e2"></span>
+          <span class="muzzle"></span><span class="nose"></span><span class="mouth"></span>
+        </div>
+        <div>
+          <div class="tiny-label">TIGRE FINANZAS</div>
+        <h2>Tu compañero para comprar</h2>
+        <p>Muéstrame lo que quieres comprar. Revisaré el precio y lo compararé con tu situación financiera.</p>
+        </div>
+      </div>
+      <button class="x" onclick="closeAdvisor()">×</button>
+    </div>
+
+    <div class="advisor-purpose">
+      <span>¿Qué tipo de compra es?</span>
+      <button id="purposeNeed" class="purpose-btn active" onclick="setAdvisorPurpose('need')">Necesito esto</button>
+      <button id="purposeWant" class="purpose-btn" onclick="setAdvisorPurpose('want')">Lo quiero</button>
+    </div>
+
+    <div class="advisor-camera-wrap" id="advisorCameraWrap">
+      <video id="advisorVideo" class="advisor-video" autoplay playsinline muted></video>
+      <canvas id="advisorCanvas" class="advisor-canvas"></canvas>
+      <img id="advisorImage" class="advisor-image" alt="Captura del producto" style="display:none">
+      <div id="advisorCameraPlaceholder" class="advisor-placeholder">
+        <div class="advisor-camera-icon">▣</div>
+        <strong>Enséñame la compra</strong>
+        <span>Activa la cámara y muéstrame el producto o el precio.</span>
+      </div>
+      <div id="advisorLiveBadge" class="advisor-live-badge" style="display:none"><i></i> EN VIVO</div>
+    </div>
+
+    <div class="advisor-actions">
+      <button class="btn btn-soft" onclick="startAdvisorCamera()">▣ Activar cámara</button>
+      <button class="btn btn-primary" id="advisorCaptureBtn" onclick="captureAdvisorPhoto()" disabled>● Analizar ahora</button>
+      <button class="btn btn-soft" id="advisorListenBtn" onclick="toggleTigreListening()">🎙 Escuchar</button>
+      <button class="btn btn-soft" id="advisorVoiceBtn" onclick="toggleTigreVoice()">🔊 Voz ON</button>
+      <label class="btn btn-soft">↑ Subir foto<input id="advisorInput" type="file" accept="image/*" capture="environment" hidden></label>
+    </div>
+
+    <div id="advisorLiveStatus" class="advisor-live-status" style="display:none">
+      <span class="live-pulse"></span><b>Modo en vivo</b>
+      <span id="advisorLiveText">Di “Tigre, mira eso”.</span>
+    </div>
+
+    <div id="advisorProgress" class="advisor-progress" style="display:none">
+      <div><span id="advisorStatus">Tigre está mirando…</span><b id="advisorPct">0%</b></div>
+      <div class="scan-track"><div id="advisorFill"></div></div>
+    </div>
+
+    <div id="advisorResult" class="advisor-result" style="display:none"></div>
+
+    <div class="advisor-foot">
+      <button class="btn btn-soft" onclick="closeAdvisor()">Cerrar</button>
+      <button class="btn btn-soft" onclick="speakLastAdvice()">🔊 Escuchar respuesta</button>
+    </div>
+  </div>
+</div>
+
+<div class="scan-modal" id="scanModal">
+  <div class="scan-box">
+    <div class="scan-head"><div><div class="tiny-label">CAPTURA INTELIGENTE</div><h2>Escanear una compra</h2><p>Sube una foto del recibo y Rider Finanzas intentará detectar monto, comercio y categoría.</p></div><button class="x" onclick="closeScanner()">×</button></div>
+    <label class="scan-drop" id="scanDrop">
+      <input id="receiptInput" type="file" accept="image/*" capture="environment" hidden>
+      <div class="scan-camera">▣</div>
+      <strong>Tomar foto o seleccionar recibo</strong>
+      <span>En el celular se abrirá la cámara trasera.</span>
+    </label>
+    <img id="receiptPreview" class="receipt-preview" alt="Vista previa del recibo" style="display:none">
+    <div id="scanProgress" class="scan-progress" style="display:none"><div class="scan-progress-top"><span id="scanStatus">Analizando recibo…</span><b id="scanPct">0%</b></div><div class="scan-track"><div id="scanFill"></div></div></div>
+    <div id="scanResult" class="scan-result" style="display:none"></div>
+    <div class="scan-actions"><button class="btn btn-soft" onclick="closeScanner()">Cerrar</button><button class="btn btn-primary" id="scanAgain" style="display:none" onclick="resetScanner()">Escanear otra</button></div>
+  </div>
+</div>
+
+<div class="modal" id="modal"><div class="modal-box"><div class="modal-top"><h2 id="modalTitle">Registrar gasto</h2><button class="x" onclick="closeModal()">×</button></div><form id="moveForm"><div class="form-grid"><div class="field"><label>Tipo</label><select id="mType"><option value="expense">Gasto</option><option value="income">Ingreso</option><option value="saving">Ahorro</option></select></div><div class="field"><label>Monto</label><input id="mAmount" type="number" min="0" step="0.01" required></div><div class="field"><label>Categoría</label><select id="mCat"></select></div><div class="field"><label>Fecha</label><input id="mDate" type="date" required></div><div class="field full"><label>Descripción</label><input id="mDesc" placeholder="Ej. Pago de sueldo"></div></div><button class="btn btn-primary" style="width:100%;margin-top:13px">Guardar movimiento</button></form></div></div>
+<div class="more-sheet" id="moreSheet"><div class="sheet"><h3>Más opciones</h3><div class="sheet-grid"><button onclick="openPage('deudas');closeMore()">◈ Deudas</button><button onclick="openPage('estadisticas');closeMore()">◒ Estadísticas</button><button onclick="openPage('config');closeMore()">⚙ Configuración</button><button onclick="closeMore()">Cancelar</button></div></div></div></div>
+
+
+<div id="tigreBubble" class="tigre-bubble" onclick="openAdvisor()" title="Tigre Finanzas">
+  <div class="tigre-face mini-avatar" aria-hidden="true">
+    <span class="ear l"></span><span class="ear r"></span>
+    <span class="face-main"></span><span class="eye e1"></span><span class="eye e2"></span>
+    <span class="muzzle"></span><span class="nose"></span><span class="mouth"></span>
+  </div>
+  <span id="tigreBubbleStatus" class="tigre-bubble-status"></span>
+</div>
+
+
+<div class="install-banner" id="installBanner">
+  <div class="install-app-icon">R</div>
+  <div class="install-copy"><b>Instala Rider Finanzas</b><span>Tenla en tu pantalla de inicio como una app.</span></div>
+  <button class="btn btn-primary" id="installBtn">Instalar</button>
+  <button class="install-close" onclick="hideInstallBanner()">×</button>
+</div>
+
+<div id="controlBubble" class="control-bubble" onclick="toggleAlertCenter()" title="Centro de alertas">
+  <span class="bubble-icon">!</span><span id="bubbleBadge" class="bubble-badge">0</span>
+</div>
+<div id="alertCenter" class="alert-center">
+  <div class="alert-center-head"><div><b>Centro de control</b><small>Alertas de tu dinero</small></div><button onclick="toggleAlertCenter()">×</button></div>
+  <div id="alertCenterBody" class="alert-center-body"><div class="alert-empty">Todavía no hay alertas.</div></div>
+  <div class="alert-center-actions"><button class="btn btn-soft" onclick="testAlert()">🔊 Probar alerta</button><button class="btn btn-primary" onclick="openPage('config');toggleAlertCenter()">⚙ Configurar</button></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script>
+const KEY="rider_finanzas_v12";
+const cats=["Comida","Transporte","Hogar","Servicios","Compras","Tecnología","Entretenimiento","Salidas","Relación","Estudios","Salud","Suscripciones","Deudas","Aseo personal","Otros"];
+const blank={name:"Rider",salary:0,currency:"$",moves:[],budgets:{},goals:[],debts:[]};
+cats.forEach(c=>blank.budgets[c]=0);
+let S=load();
+let month=new Date().toISOString().slice(0,7);
+
+function load(){try{const old=JSON.parse(localStorage.getItem("mi_control_sueldo_v1")||localStorage.getItem("mi_control_sueldo_v2")||localStorage.getItem("mi_control_sueldo_v3")||localStorage.getItem("mi_control_sueldo_v4")||localStorage.getItem("mi_control_sueldo_v5")||localStorage.getItem("mi_control_sueldo_v6")||localStorage.getItem("mi_control_sueldo_v7")||localStorage.getItem(KEY)||"null"); if(old){old.budgets=Object.assign({},blank.budgets,old.budgets||{});old.moves=old.moves||[];old.goals=old.goals||[];old.debts=old.debts||[];old.alerts=Object.assign({threshold:0.50,soon:0.30,critical:0.15,sound:true,browser:true},old.alerts||{});
+old.tigre=Object.assign({voice:true,rate:0.98,pitch:1.02},old.tigre||{});return old;}}catch(e){} const fresh=structuredClone(blank);fresh.alerts={threshold:0.50,soon:0.30,critical:0.15,sound:true,browser:true};fresh.tigre={voice:true,rate:0.98,pitch:1.02};return fresh}
+function persist(){localStorage.setItem(KEY,JSON.stringify(S)); render(); setTimeout(checkSmartAlerts,0)}
+function money(n){return `${S.currency}${Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`}
+function mMoves(){return S.moves.filter(x=>(x.date||"").slice(0,7)===month)}
+function totals(){const m=mMoves();return {income:m.filter(x=>x.type==="income").reduce((a,x)=>a+x.amount,0),expense:m.filter(x=>x.type==="expense").reduce((a,x)=>a+x.amount,0),saving:m.filter(x=>x.type==="saving").reduce((a,x)=>a+x.amount,0)}}
+function openPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));const p=document.getElementById(id);if(!p)return;p.classList.add("active");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));document.getElementById("pageTitle").textContent=id==="dashboard"?"Resumen":p.querySelector("h2")?.textContent||id;window.scrollTo({top:0,behavior:"smooth"});if(window.innerWidth<=650&&["deudas","estadisticas","config"].includes(id))closeMore()}
+document.querySelectorAll(".nav button").forEach(btn=>btn.addEventListener("click",()=>{ if(window.innerWidth<=650 && btn.dataset.page==="deudas"){openMore();return} openPage(btn.dataset.page)}));
+function openMore(){document.getElementById("moreSheet").classList.add("open")}function closeMore(){document.getElementById("moreSheet").classList.remove("open")}
+
+let alertState={level:0,count:0,lastMessage:""};
+function toggleAlertCenter(){document.getElementById("alertCenter").classList.toggle("open")}
+function playAlertSound(){try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const c=new C(),o=c.createOscillator(),g=c.createGain();o.type="sine";o.frequency.setValueAtTime(880,c.currentTime);o.frequency.setValueAtTime(660,c.currentTime+.14);o.frequency.setValueAtTime(880,c.currentTime+.28);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.22,c.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.52);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.55);setTimeout(()=>c.close(),800)}catch(e){}}
+async function sendBrowserAlert(title,message){if(!S.alerts?.browser||!("Notification" in window))return;if(Notification.permission==="default"){try{await Notification.requestPermission()}catch(e){}}if(Notification.permission==="granted"){try{new Notification(title,{body:message,tag:"rider-finanzas"})}catch(e){}}}
+function flashBubble(){const b=document.getElementById("controlBubble");b.classList.remove("pulse");void b.offsetWidth;b.classList.add("pulse")}
+function fireSmartAlert(level,title,message,kind="warning"){
+  if(alertState.level===level)return;
+  alertState.level=level;alertState.count++;alertState.lastMessage=message;
+  const hist=JSON.parse(localStorage.getItem("rider_alert_history_v1")||"[]");
+  hist.unshift({level,title,message,time:new Date().toISOString()});localStorage.setItem("rider_alert_history_v1",JSON.stringify(hist.slice(0,12)));
+  bubbleBadge.textContent=alertState.count;bubbleBadge.style.display="grid";flashBubble();
+  alertCenterBody.innerHTML=`<div class="center-alert ${kind}"><div class="center-icon">!</div><div><b>${title}</b><span>${message}</span><small>${new Date().toLocaleTimeString("es-PA",{hour:"2-digit",minute:"2-digit"})}</small></div></div>`;
+  document.getElementById("alertCenter").classList.add("open");
+  if(S.alerts?.sound!==false)playAlertSound();
+  sendBrowserAlert(title,message);toast("🔔 "+title);
+  setTimeout(()=>document.getElementById("alertCenter").classList.remove("open"),6500);
+}
+function getAlertLevel(remaining){
+  if(remaining<=Number(S.alerts?.critical??0.15))return 3;
+  if(remaining<=Number(S.alerts?.soon??0.30))return 2;
+  if(remaining<=Number(S.alerts?.threshold??0.50))return 1;
+  return 0;
+}
+function checkSmartAlerts(){
+  const t=totals(),base=t.income||S.salary||0,bal=t.income-t.expense-t.saving;
+  if(!base)return;
+  const remaining=Math.max(0,bal/base),level=getAlertLevel(remaining),amount=money(bal),pct=(remaining*100).toFixed(0);
+  if(level===3){fireSmartAlert(3,"Te estás quedando sin plata",`Oe, brother: solo te quedan ${amount} (${pct}% de tu dinero). Controla tus gastos ya.` ,"critical");return}
+  if(level===2){fireSmartAlert(2,"Pronto te vas a quedar sin dinero",`Solo te quedan ${amount}. Ya estás en ${pct}% disponible; evita gastos no esenciales.` ,"warning");return}
+  if(level===1){fireSmartAlert(1,"Controla tu gasto",`Te quedan ${amount}. Ya llegaste al 50% o menos de dinero disponible.` ,"warning");return}
+  if(level===0)alertState.level=0;
+}
+function testAlert(){alertState.level=0;fireSmartAlert(99,"Alerta de prueba","Oe, brother, este es el sonido de prueba de Rider Finanzas.","warning")}
+
+
+let lastScanObjectUrl=null;
+function openScanner(){document.getElementById("scanModal").classList.add("open");resetScanner()}
+function closeScanner(){document.getElementById("scanModal").classList.remove("open");if(lastScanObjectUrl){URL.revokeObjectURL(lastScanObjectUrl);lastScanObjectUrl=null}}
+function resetScanner(){receiptInput.value="";receiptPreview.style.display="none";scanProgress.style.display="none";scanResult.style.display="none";scanAgain.style.display="none";scanFill.style.width="0%";scanPct.textContent="0%";scanStatus.textContent="Analizando recibo…"}
+function normalizeText(t){return (t||"").replace(/\r/g,"").replace(/[|]/g,"I")}
+function parseMoneyCandidates(text){
+  const clean=normalizeText(text).replace(/\s+/g," ");
+  const matches=[];
+  const re=/(\d{1,5}(?:[.,]\d{3})*[.,]\d{1,2}|\d{1,5}[.,]\d{1,2}|\d{1,5}(?:[.,]\d{3})+|\d+)/g;
+  let m;
+  while((m=re.exec(clean))){
+    const raw=m[1],val=parseLocalizedMoney(raw);
+    if(!isFinite(val)||val<=0||val>=100000)continue;
+    matches.push({raw,val,idx:m.index});
+  }
+  return matches;
+}
+function detectTotal(text){
+  const lines=normalizeText(text).split("\n").map(x=>x.trim()).filter(Boolean);
+  const totalWords=["total","importe total","total a pagar","neto a pagar","monto total","amount due","grand total"];
+  for(const line of lines){
+    const low=line.toLowerCase();
+    if(totalWords.some(w=>low.includes(w))){
+      const ms=parseMoneyCandidates(line);
+      if(ms.length) return ms[ms.length-1].val;
+    }
+  }
+  const all=parseMoneyCandidates(text).filter(x=>x.val>0&&x.val<100000);
+  if(!all.length)return null;
+  // Receipts often put the final/total amount near the bottom.
+  return all.sort((a,b)=>a.idx-b.idx)[all.length-1].val;
+}
+function detectMerchant(text){
+  const lines=normalizeText(text).split("\n").map(x=>x.trim()).filter(Boolean);
+  const blocked=/^(total|subtotal|itbms|iva|cambio|efectivo|tarjeta|visa|mastercard|fecha|hora|factura|ruc|nit|tel|telefono|\d+[\s\d\-]*)$/i;
+  return lines.slice(0,8).find(x=>x.length>=3&&!blocked.test(x)&&!/\d{5,}/.test(x))||"Compra";
+}
+function detectCategory(text){
+  const s=normalizeText(text).toLowerCase();
+  const rules=[
+    ["Comida",["supermercado","supermarket","restaurant","restaurante","comida","food","pizza","burger","pollo","cafe","cafetería","panadería","mercado","fresh market","xtra","rey"]],
+    ["Transporte",["uber","indrive","taxi","gasolina","combustible","estacion","estación","metro","bus","transporte","parking","parqueo"]],
+    ["Entretenimiento",["cine","cinema","netflix","spotify","steam","playstation","xbox","juego","gaming","teatro","concierto"]],
+    ["Salud",["farmacia","medical","hospital","clinica","clínica","doctor","medicina","medicamento","laboratorio"]],
+    ["Aseo personal",["barber","barbería","peluquer","salon","salón","shampoo","jabón","higiene","perfume","cosmetica"]],
+    ["Hogar",["ferreteria","ferretería","muebleria","mueblería","hogar","casa","limpieza","repuesto","herramienta"]],
+    ["Suscripciones",["suscripcion","suscripción","subscription","netflix","spotify","prime","disney","hbo","icloud"]],
+    ["Estudios",["universidad","umecit","colegio","curso","libro","papeleria","papelería","estudio"]],
+    ["Compras",["tienda","shop","mall","ropa","zapatos","electronica","electrónica","celular","accesorio"]],
+    ["Salidas",["bar","discoteca","restobar","cerveza","salida","noche"]],
+    ["Relación",["regalo","pareja","novia","novio","cita","romantico","romántico"]]
+  ];
+  for(const [cat,words] of rules){if(words.some(w=>s.includes(w)))return cat}
+  return "Otros";
+}
+
+
+
+let advisorStream=null,advisorLastMove=null,advisorPurpose="need",advisorLastCategory="Otros";
+
+let tigreSpeaking=false,tigreSpeakingTimer=null;
+
+function setTigreSpeaking(on){
+  tigreSpeaking=!!on;
+  const a=document.getElementById("tigreAvatar"),b=document.getElementById("tigreBubble"),m=document.querySelector(".tigre-face .mouth");
+  if(a)a.classList.toggle("speaking",on);
+  if(b)b.classList.toggle("speaking",on);
+  if(m)m.classList.toggle("talking",on);
+  if(tigreSpeaking){clearTimeout(tigreSpeakingTimer);tigreSpeakingTimer=setTimeout(()=>setTigreSpeaking(false),12000)}
+}
+function speakTigre(text,force=false){
+  if(!text||!("speechSynthesis" in window))return false;
+  if(!force && S.tigre?.voice===false)return false;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="es-PA";u.rate=S.tigre?.rate||.98;u.pitch=S.tigre?.pitch||1.02;u.volume=1;
+    u.onstart=()=>setTigreSpeaking(true);u.onend=()=>setTigreSpeaking(false);u.onerror=()=>setTigreSpeaking(false);
+    speechSynthesis.speak(u);return true;
+  }catch(e){setTigreSpeaking(false);return false}
+}
+function toggleTigreVoice(){
+  S.tigre=S.tigre||{voice:true,rate:.98,pitch:1.02};
+  S.tigre.voice=!S.tigre.voice;
+  advisorVoiceBtn.textContent=S.tigre.voice?"🔊 Voz ON":"🔇 Voz OFF";
+  if(S.tigre.voice){speakTigre("Listo, brother. Tigre ya tiene la voz activada.",true)}
+  else{speechSynthesis?.cancel();setTigreSpeaking(false);toast("Voz de Tigre desactivada")}
+  localStorage.setItem(KEY,JSON.stringify(S));
+}
+
+
+
+function openAdvisor(){document.getElementById("advisorModal").classList.add("open");resetAdvisor()}
+function closeAdvisor(){document.getElementById("advisorModal").classList.remove("open");stopAdvisorCamera();resetAdvisorUI();if("speechSynthesis" in window)speechSynthesis.cancel();setTigreSpeaking(false)}
+function setAdvisorPurpose(p){advisorPurpose=p;purposeNeed.classList.toggle("active",p==="need");purposeWant.classList.toggle("active",p==="want");}
+function resetAdvisorUI(){
+  advisorVoiceBtn.textContent=S.tigre?.voice!==false?"🔊 Voz ON":"🔇 Voz OFF";
+  advisorProgress.style.display="none";advisorResult.style.display="none";advisorImage.style.display="none";advisorVideo.style.display="none";advisorCameraPlaceholder.style.display="grid";advisorLiveBadge.style.display="none";advisorCaptureBtn.disabled=true;advisorInput.value="";advisorFill.style.width="0%";advisorPct.textContent="0%";advisorStatus.textContent="Tigre está mirando…";lastAdvisorAdvice=null;
+}
+function resetAdvisor(){stopAdvisorCamera();resetAdvisorUI();setAdvisorPurpose("need");}
+async function startAdvisorCamera(){
+  if(!navigator.mediaDevices?.getUserMedia){
+    advisorCameraPlaceholder.style.display="grid";
+    advisorCameraPlaceholder.innerHTML=`<div class="advisor-camera-icon">🔒</div><strong>Necesito abrir Rider Finanzas en modo local</strong><span>Estás abriendo el HTML directamente. Cierra esta pestaña y ejecuta <b>INICIAR_RIDER_FINANZAS.bat</b> dentro de la carpeta.</span>`;
+    return;
+  }
+  try{
+    stopAdvisorCamera();
+    advisorStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1280},height:{ideal:720}},audio:false});
+    advisorVideo.srcObject=advisorStream;advisorVideo.style.display="block";advisorCameraPlaceholder.style.display="none";advisorImage.style.display="none";advisorCaptureBtn.disabled=false;advisorLiveBadge.style.display="block";
+    advisorLiveStatus.style.display="flex";advisorLiveText.textContent='Cámara activa. Di “Tigre, mira eso” o pulsa “Analizar ahora”.';
+  }catch(e){
+    console.error(e);
+    const name=e?.name||"Error";
+    const msg=name==="NotAllowedError"?"El navegador bloqueó el permiso de cámara. Permítelo para localhost.":name==="NotFoundError"?"No encontré una cámara disponible.":"No pude abrir la cámara. Permite el acceso y prueba otra vez.";
+    advisorCameraPlaceholder.style.display="grid";
+    advisorCameraPlaceholder.innerHTML=`<div class="advisor-camera-icon">⚠</div><strong>${msg}</strong><span>También puedes usar “Subir foto”.</span>`;
+  }
+}
+function stopAdvisorCamera(){
+  stopTigreListening();
+  if(advisorStream){advisorStream.getTracks().forEach(t=>t.stop());advisorStream=null}
+  if(typeof advisorVideo!=="undefined")advisorVideo.srcObject=null;
+}
+function captureAdvisorPhoto(){
+  if(!advisorStream){alert("Activa la cámara primero.");return}
+  const v=advisorVideo,c=advisorCanvas;c.width=v.videoWidth||1280;c.height=v.videoHeight||720;
+  const ctx=c.getContext("2d");ctx.drawImage(v,0,0,c.width,c.height);
+  c.toBlob(blob=>{if(blob)processAdvisorImage(blob,true)},"image/jpeg",.92);
+}
+function speakLastAdvice(){if(!lastAdvisorAdvice){toast("Tigre todavía no tiene una recomendación.");return}speakTigre(lastAdvisorAdvice.voice||lastAdvisorAdvice.text,true)}
+
+function parseLocalizedMoney(raw){
+  let s=String(raw||"").trim().replace(/[^\d.,-]/g,"");if(!s)return NaN;
+  const dots=(s.match(/\./g)||[]).length,commas=(s.match(/,/g)||[]).length;
+  const lastDot=s.lastIndexOf("."),lastComma=s.lastIndexOf(",");
+  if(lastDot<0&&lastComma<0)return Number(s);
+  if(lastDot>=0&&lastComma>=0){
+    const dec=Math.max(lastDot,lastComma),frac=s.slice(dec+1).replace(/[.,]/g,""),whole=s.slice(0,dec).replace(/[.,]/g,"");
+    if(frac.length<=2)return Number(`${whole}.${frac}`);
+    return Number(s.replace(/[.,]/g,""));
+  }
+  const sep=lastDot>=0?".":",",pos=s.lastIndexOf(sep),frac=s.slice(pos+1),whole=s.slice(0,pos);
+  if(frac.length<=2)return Number(`${whole.replace(/[.,]/g,"")}.${frac}`);
+  return Number(s.replace(/[.,]/g,""));
+}
+function moneyCandidatesFromWords(words){
+  const arr=[];
+  for(let i=0;i<(words||[]).length;i++){
+    const w=words[i],txt=(w.text||"").trim();
+    const near=[txt,words[i-1]?.text||"",words[i+1]?.text||""];
+    const joined=near.join(" ");
+    const currency=/[$€]|B\/\.|PAB|US\$/i.test(joined);
+    const matches=[...joined.matchAll(/(?:B\/\.?|PAB|US\$|\$)?\s*(\d{1,6}(?:[.,]\d{1,3})?)/g)];
+    for(const m of matches){
+      const val=parseLocalizedMoney(m[1]);if(!(val>0)||val>=100000)continue;
+      const bbox=w.bbox||{y0:0,y1:0};const height=Math.max(1,(bbox.y1||0)-(bbox.y0||0));
+      const conf=Number(w.confidence||0);arr.push({val,currency,conf,height,idx:i,text:m[0],y:bbox.y0||0});
+    }
+  }
+  return arr;
+}
+function advisorMoneyCandidates(text){
+  const clean=normalizeText(text).replace(/\s+/g," "),arr=[],re=/(?:B\/\.?|PAB|US\$|\$)\s*(\d{1,6}(?:[.,]\d{1,3})?|\d{1,6})|\b(\d{1,6}[.,]\d{1,2})\b/g;let m;
+  while((m=re.exec(clean))){
+    const raw=m[1]||m[2],val=parseLocalizedMoney(raw);if(isFinite(val)&&val>0&&val<100000)arr.push({val,idx:m.index,raw,currency:!!m[1]});
+  }return arr;
+}
+function pickAdvisorPrice(data,raw){
+  const words=data?.words||[];
+  const wordCands=moneyCandidatesFromWords(words).filter(x=>x.val>0&&x.val<100000);
+  // Strong preference: explicit currency + larger text + confidence.
+  const strong=wordCands.filter(x=>x.currency).sort((a,b)=>(b.height*1.8+b.conf*.35)-(a.height*1.8+a.conf*.35));
+  if(strong.length)return strong[0].val;
+  const text=advisorMoneyCandidates(raw);
+  // Reject times/dates when they appear in a nearby date/time context.
+  const filtered=text.filter(x=>!(/\b\d{1,2}[:h]\d{2}\b/.test(raw.slice(Math.max(0,x.idx-8),x.idx+12))));
+  if(filtered.length){
+    // For single-decimal/2-decimal money, prefer 1-2 fractional digits.
+    const decimal=filtered.filter(x=>/[.,]\d{1,2}$/.test(x.raw));
+    if(decimal.length)return decimal[0].val;
+    return filtered[0].val;
+  }
+  return null;
+}
+function detectProductName(text){
+  const lines=normalizeText(text).split("\n").map(x=>x.trim()).filter(x=>x.length>=4);
+  const bad=/^(total|subtotal|precio|price|oferta|sale|itbms|iva|ruc|sku|codigo|c[oó]digo|fecha|hora|compra realizada|compra realizada desde|debito|cr[eé]dito|tarjeta|visa|mastercard|martes|lunes|domingo|s[aá]bado)$/i;
+  const moneyish=/^(?:B\/\.|PAB|US\$|\$)?\s*[\d.,]+$/;
+  const candidates=lines.slice(0,25).filter(x=>x.length<=90&&!bad.test(x)&&!moneyish.test(x)&&!/^(\d|[\W_])/.test(x));
+  const preferred=candidates.find(x=>/(playstation|ps5|xbox|switch|abanico|ventilador|celular|iphone|samsung|xiaomi|laptop|televisor|television|tv|monitor|auricular|aud[ií]fono|pollo|arroz|leche|agua|supermercado|comida|express|terminal|store|tienda)/i.test(x));
+  return preferred||candidates[0]||"Compra";
+}
+function classifyAdvisorProduct(name,text){
+  const s=(name+" "+text).toLowerCase();
+  if(/playstation|ps5|xbox|switch|videojuego|consola|televisor|tv|monitor|audifono|auricular|celular|iphone|samsung|xiaomi|laptop|computador|pc|tablet/.test(s))return "Tecnología";
+  if(/abanico|ventilador|nevera|refrigerador|microondas|licuadora|cocina|cama|mueble|silla|mesa|herramienta|taladro/.test(s))return "Hogar";
+  if(/zapato|camisa|pantal[oó]n|ropa|vestido|gorra|perfume|reloj/.test(s))return "Compras";
+  if(/pollo|arroz|leche|agua|comida|pizza|hamburg|pan|bebida|supermercado|mercado/.test(s))return "Comida";
+  if(/gasolina|uber|indrive|taxi|metro|bus|parking|parqueo/.test(s))return "Transporte";
+  if(/cine|netflix|spotify|juego|concierto|bar|discoteca/.test(s))return "Entretenimiento";
+  if(/farmacia|medicina|doctor|clinica|clínica|salud/.test(s))return "Salud";
+  return "Compras";
+}
+function advisorAdvice(price,product){
+  const t=totals(),base=t.income||S.salary||0,available=Math.max(0,t.income-t.expense-t.saving),budgetLimit=S.budgets?.[advisorLastCategory||""]||0;
+  const catSpent=mMoves().filter(x=>x.type==="expense"&&x.cat===(advisorLastCategory||"")).reduce((a,x)=>a+x.amount,0);
+  const after=available-price,ratio=available>0?price/available:Infinity,essential=advisorPurpose==="need";
+  if(price<=5){
+    if(price<=available)return {kind:"good",title:essential?"Tigre dice: sí, cómpralo.":"Tigre dice: puedes darte el gusto.",text:`Cuesta ${money(price)} y después te quedarían ${money(after)}. Es una compra pequeña para tu disponible actual; no hace falta crear una meta por esto.`,voice:`Sí, brother. Puedes comprarlo. Te cuesta ${money(price)} y después te quedan ${money(after)}.` ,canBuy:true};
+    return {kind:"bad",title:"Tigre dice: espera.",text:`Cuesta ${money(price)}, pero ahora mismo no tienes dinero disponible. Espera al próximo ingreso; no hace falta inventar un plan de ahorro para una compra tan pequeña.`,voice:`Brother, ahora mismo no tienes dinero disponible. Mejor espera al próximo ingreso.`,canBuy:false};
+  }
+  if(!base&&available<=0)return {kind:"neutral",title:"Tigre dice: necesito tus números.",text:`Veo un precio de ${money(price)}, pero todavía no tengo un ingreso o saldo disponible. Configura tu sueldo o registra tu ingreso y te digo si cabe.`,voice:`Necesito tus números antes de decirte si te conviene.`,canBuy:false};
+  if(price>available){
+    const gap=price-available,monthly=base>0&&gap>Math.max(15,base*.03)?Math.max(10,Math.min(base*.10,gap)):0,months=monthly?Math.ceil(gap/monthly):0;
+    const plan=monthly?`Una forma razonable sería apartar ${money(monthly)} al mes y llegar en aproximadamente ${months} mes${months===1?"":"es"}.`:"Mejor espera a tu próximo ingreso y volvemos a revisarlo.";
+    if(essential)return {kind:"bad",title:"Tigre dice: no ahora.",text:`La necesitas, pero hoy no tienes ${money(price)} disponibles. Te faltan ${money(gap)}. ${plan}`,voice:`No ahora, brother. Te faltan ${money(gap)}. ${plan}`,canBuy:false,save:monthly,months};
+    return {kind:"bad",title:"Tigre dice: yo esperaría.",text:`Ahora mismo no te alcanza. Te faltan ${money(gap)}. ${plan}`,voice:`Yo esperaría, brother. Te faltan ${money(gap)}. ${plan}`,canBuy:false,save:monthly,months};
+  }
+  if(budgetLimit>0&&price>Math.max(0,budgetLimit-catSpent))return {kind:"warn",title:"Tigre dice: puedes, pero romperías tu presupuesto.",text:`Puedes pagarlo, pero ${advisorLastCategory} ya lleva ${money(catSpent)} y solo quedan ${money(Math.max(0,budgetLimit-catSpent))} de presupuesto.`,voice:`Puedes pagarlo, pero romperías tu presupuesto de ${advisorLastCategory}.`,canBuy:true,budgetWarning:true};
+  if(ratio<=.15)return {kind:"good",title:essential?"Tigre dice: sí, está dentro de tu margen.":"Tigre dice: sí, puedes comprarlo.",text:`Cuesta ${money(price)}, usas ${(ratio*100).toFixed(0)}% de tu disponible y te quedarían ${money(after)}. La compra cabe sin apretar demasiado tu margen.`,voice:`Sí, brother. La compra cabe. Te quedarían ${money(after)}.`,canBuy:true};
+  if(ratio<=.30)return {kind:"warn",title:essential?"Tigre dice: puedes, pero revisa tu presupuesto.":"Tigre dice: yo lo pensaría.",text:`La compra consume ${(ratio*100).toFixed(0)}% de tu dinero disponible. Después te quedarían ${money(after)}. No te deja en cero, pero reduce bastante tu margen.`,voice:`Puedes comprarlo, pero te reduce bastante el margen. Después te quedarían ${money(after)}.`,canBuy:true};
+  return {kind:"warn",title:"Tigre dice: mejor espera.",text:`La compra se llevaría ${(ratio*100).toFixed(0)}% de tu dinero disponible. Si no es urgente, conservar ese margen es más sano.`,voice:`Yo esperaría, brother. Esa compra se lleva ${(ratio*100).toFixed(0)} por ciento de tu disponible.`,canBuy:true};
+}
+async function processAdvisorImage(file,keepCamera=false){
+  if(!window.Tesseract){alert("No se pudo cargar el analizador. Necesitas conexión a internet.");return}
+  if(!keepCamera)stopTigreListening();
+  if(lastScanObjectUrl)URL.revokeObjectURL(lastScanObjectUrl);
+  lastScanObjectUrl=URL.createObjectURL(file);
+  advisorImage.src=lastScanObjectUrl;advisorImage.style.display="none";
+  if(!advisorStream){advisorVideo.style.display="none";advisorCameraPlaceholder.style.display="none";advisorImage.style.display="block"}
+  advisorProgress.style.display="block";advisorResult.style.display="none";advisorStatus.textContent="Tigre está leyendo…";advisorPct.textContent="0%";advisorFill.style.width="0%";
+  try{
+    const worker=await Tesseract.createWorker("spa",1,{logger:m=>{if(m.status==="recognizing text"){const p=Math.round((m.progress||0)*100);advisorFill.style.width=p+"%";advisorPct.textContent=p+"%"}}});
+    const {data}=await worker.recognize(file);await worker.terminate();
+    const raw=data.text||"",price=pickAdvisorPrice(data,raw),product=detectProductName(raw),category=classifyAdvisorProduct(product,raw);advisorLastCategory=category;
+    advisorFill.style.width="100%";advisorPct.textContent="100%";advisorStatus.textContent="Análisis terminado";
+    if(!(price>0)){
+      advisorResult.innerHTML=`<div class="advisor-answer warn"><strong>No encontré un precio claro.</strong><span>Muéstrame el precio más grande o acércate un poco. Tigre no va a inventar un monto.</span></div>`;advisorResult.style.display="block";return;
+    }
+    const advice=advisorAdvice(price,product);
+    const financialBase=totals().income||S.salary||0;
+    const confidence=Math.max(25,Math.min(99,Math.round((data.confidence||0)*.8 + (price?20:0))));
+    advisorLastMove={amount:+price.toFixed(2),desc:product,cat:category,date:new Date().toISOString().slice(0,10),advice};
+    lastAdvisorAdvice=advice;
+    const after=Math.max(0,(totals().income-totals().expense-totals().saving)-price);
+    const buyButton=advice.canBuy?'<button class="btn btn-primary" onclick="registerAdvisorPurchase()">✓ Comprar y registrar</button>':"";
+    advisorResult.innerHTML=`<div class="advisor-result-top"><div><div class="advisor-product">${product}</div><div style="font-size:9px;color:#82909d;margin-top:3px">${category}</div></div><div class="advisor-price">${money(price)}</div></div>
+      <div class="advisor-answer ${advice.kind==="neutral"?"neutral":advice.kind}"><strong>${advice.title}</strong><span>${advice.text}</span></div>
+      <div class="advisor-data"><div><small>Disponible</small><b>${money(Math.max(0,totals().income-totals().expense-totals().saving))}</b></div><div><small>Precio</small><b>${money(price)}</b></div><div><small>Después</small><b>${money(after)}</b></div><div><small>Impacto</small><b>${financialBase?(price/financialBase*100).toFixed(1):0}%</b></div></div>
+      <div class="confidence-row"><span>Confianza lectura</span><div class="confidence-track"><i style="width:${confidence}%"></i></div><b>${confidence}%</b></div>
+      <div class="advisor-buttons">${buyButton}<button class="btn btn-soft" onclick="saveAdvisorGoal()">🎯 Guardar como meta</button><button class="btn btn-soft" onclick="speakLastAdvice()">🔊 Oír</button></div>`;
+    advisorResult.style.display="block";
+    if(keepCamera){advisorLiveStatus.style.display="flex";advisorLiveText.textContent="Listo. Puedes mostrarme otra cosa y decir “Tigre, mira eso”.";}
+    // Tigre speaks the same financial answer aloud when voice is enabled.
+    setTimeout(()=>speakTigre(advice.voice||advice.text),180);
+  }catch(e){console.error(e);advisorResult.innerHTML=`<div class="advisor-answer bad"><strong>No pude analizar la imagen.</strong><span>Prueba con buena luz y que el precio quede enfocado.</span></div>`;advisorResult.style.display="block"}
+}
+async function toggleTigreListening(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(window.isSecureContext===false){alert("La escucha necesita abrir Rider Finanzas desde localhost o HTTPS. Ejecuta INICIAR_RIDER_FINANZAS.bat.");return}
+  if(!SR){alert("Este navegador no admite escucha continua. Usa “Analizar ahora”.");return}
+  if(tigreListening){stopTigreListening();return}
+  if(!advisorStream){await startAdvisorCamera();if(!advisorStream)return}
+  tigreListening=true;advisorListenBtn.textContent="■ Detener escucha";advisorLiveStatus.style.display="flex";advisorLiveBadge.style.display="block";advisorLiveText.textContent='Escuchando… di “Tigre, mira eso”.';
+  tigreRecognition=new SR();tigreRecognition.lang="es-PA";tigreRecognition.continuous=true;tigreRecognition.interimResults=false;tigreRecognition.maxAlternatives=1;
+  tigreRecognition.onresult=e=>{for(let i=e.resultIndex;i<e.results.length;i++){if(!e.results[i].isFinal)continue;const phrase=(e.results[i][0]?.transcript||"").toLowerCase();advisorLiveText.textContent=`Tigre escuchó: “${phrase}”`;if(/\btigre\b/.test(phrase)&&/(mira|mire|ve|eso|analiza|analiza esto|qué es|que es)/i.test(phrase)){advisorLiveText.textContent="Tigre está mirando…";captureAdvisorPhoto();return}}};
+  tigreRecognition.onerror=e=>{if(e.error!=="no-speech")advisorLiveText.textContent="La escucha tuvo un problema. Puedes usar “Analizar ahora”."};
+  tigreRecognition.onend=()=>{if(tigreListening){try{tigreRecognition.start()}catch(e){}}};
+  try{tigreRecognition.start()}catch(e){tigreListening=false;advisorListenBtn.textContent="🎙 Escuchar"}
+}
+function stopTigreListening(){tigreListening=false;if(tigreRecognition){try{tigreRecognition.onend=null;tigreRecognition.stop()}catch(e){}tigreRecognition=null}if(typeof advisorListenBtn!=="undefined")advisorListenBtn.textContent="🎙 Escuchar"}
+function registerAdvisorPurchase(){
+  if(!advisorLastMove)return;
+  S.moves.push({id:crypto.randomUUID(),type:"expense",amount:advisorLastMove.amount,cat:advisorLastMove.cat,date:advisorLastMove.date,desc:advisorLastMove.desc});
+  persist();toast(`✓ ${advisorLastMove.desc} registrado`);
+  advisorResult.innerHTML=`<div class="advisor-answer good"><strong>✓ Compra registrada</strong><span>${advisorLastMove.desc} por ${money(advisorLastMove.amount)} ya está en tu historial.</span></div>`;
+  setTimeout(()=>closeAdvisor(),1700);
+}
+function saveAdvisorGoal(){
+  if(!advisorLastMove)return;
+  if(advisorLastMove.amount<=5){toast("Tigre: por este monto no necesitas una meta.");return}
+  const exists=S.goals.find(g=>g.name.toLowerCase()===advisorLastMove.desc.toLowerCase());if(exists){toast("Esa meta ya existe");return}
+  S.goals.push({name:advisorLastMove.desc,target:advisorLastMove.amount,saved:0});persist();toast("🎯 Meta creada");
+}
+function listenToTigre(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){toast("Tu navegador no tiene reconocimiento de voz.");return}
+  const r=new SR();r.lang="es-PA";r.interimResults=false;r.maxAlternatives=1;toast("🎙 Habla con Tigre…");
+  r.onresult=e=>{const said=e.results[0][0].transcript.toLowerCase();if(advisorLastMove&&(said.includes("cómpr")||said.includes("compr")||said.includes("sí"))){registerAdvisorPurchase()}else toast(`Tigre escuchó: “${e.results[0][0].transcript}”`)};r.onerror=()=>toast("No pude escuchar. Prueba otra vez.");r.start();
+}
+advisorInput.addEventListener("change",e=>{if(e.target.files?.[0])processAdvisorImage(e.target.files[0],false)});
+
+async function scanReceipt(file){
+  if(!file)return;
+  if(!window.Tesseract){showScanResult("No se pudo cargar el analizador OCR. Conéctate a internet y prueba de nuevo.",true);return}
+  if(lastScanObjectUrl){URL.revokeObjectURL(lastScanObjectUrl)}
+  lastScanObjectUrl=URL.createObjectURL(file);receiptPreview.src=lastScanObjectUrl;receiptPreview.style.display="block";scanProgress.style.display="block";scanResult.style.display="none";scanAgain.style.display="none";
+  try{
+    const worker=await Tesseract.createWorker("spa",1,{logger:m=>{
+      if(m.status==="recognizing text"){const p=Math.round((m.progress||0)*100);scanFill.style.width=p+"%";scanPct.textContent=p+"%";scanStatus.textContent="Leyendo el recibo…"}
+      else if(m.status){scanStatus.textContent="Preparando el analizador…"}
+    }});
+    const {data}=await worker.recognize(file);
+    await worker.terminate();
+    const raw=data.text||"", total=detectTotal(raw), merchant=detectMerchant(raw), category=detectCategory(raw);
+    scanFill.style.width="100%";scanPct.textContent="100%";scanStatus.textContent="Análisis terminado";
+    if(!(total>0)){showScanResult("No pude detectar un monto total con suficiente confianza. Toma una foto donde se vea completo el total del recibo.",true);scanAgain.style.display="inline-block";return}
+    const today=new Date().toISOString().slice(0,10);
+    const move={id:crypto.randomUUID(),type:"expense",amount:+total.toFixed(2),cat:category,date:today,desc:merchant};
+    S.moves.push(move);persist();scanAgain.style.display="inline-block";
+    showScanResult(`Gasto registrado automáticamente.`,false,{amount:move.amount,cat:category,merchant,date:today,confidence:data.confidence});
+    setTimeout(()=>closeScanner(),2200);
+  }catch(e){console.error(e);showScanResult("No pude analizar la foto. Prueba con buena luz, sin reflejos y mostrando el recibo completo.",true);scanAgain.style.display="inline-block"}
+}
+function showScanResult(message,isWarn,info){
+  scanResult.style.display="block";
+  if(!info){scanResult.innerHTML=`<div class="${isWarn?"scan-warn":"scan-ok"}">${message}</div>`;return}
+  scanResult.innerHTML=`<div class="scan-ok">✓ ${message}</div><div class="scan-result-grid"><div class="scan-result-item"><span>Monto detectado</span><b>${money(info.amount)}</b></div><div class="scan-result-item"><span>Categoría</span><b>${info.cat}</b></div><div class="scan-result-item"><span>Comercio / descripción</span><b>${info.merchant}</b></div><div class="scan-result-item"><span>Fecha</span><b>${info.date}</b></div></div><div style="font-size:9px;color:#7f8d9b;margin-top:10px">El movimiento ya quedó guardado en tu historial y aparecerá en el dashboard. Si el total parece incorrecto, puedes volver a escanear la foto.</div>`;
+}
+receiptInput.addEventListener("change",e=>{if(e.target.files?.[0])scanReceipt(e.target.files[0])});
+
+
+function notifStorageKey(){return "rider_finanzas_notifications_seen_v1"}
+function shouldShowNotificationWelcome(){
+  return "Notification" in window && localStorage.getItem(notifStorageKey())!=="1" && Notification.permission!=="granted";
+}
+function showNotificationWelcome(){if(shouldShowNotificationWelcome())document.getElementById("notifWelcome").classList.add("open")}
+function dismissNotifWelcome(){localStorage.setItem(notifStorageKey(),"1");document.getElementById("notifWelcome").classList.remove("open")}
+async function enableNotifications(){
+  if(!("Notification" in window)){alert("Este navegador no admite notificaciones. Las alertas internas y el sonido seguirán funcionando.");dismissNotifWelcome();return}
+  if(window.isSecureContext===false && location.hostname!=="localhost"){alert("Para recibir notificaciones del navegador, Rider Finanzas necesita abrirse desde HTTPS o localhost. Las alertas internas y el sonido seguirán funcionando.");return}
+  try{
+    const p=await Notification.requestPermission();
+    localStorage.setItem(notifStorageKey(),"1");
+    document.getElementById("notifWelcome").classList.remove("open");
+    if(p==="granted"){toast("🔔 Notificaciones activadas")}
+    else{toast("Notificaciones no permitidas")}
+  }catch(e){toast("No pude activar las notificaciones")}
+}
+function announceNotificationAccess(){
+  // Native browser permission prompts must follow a user gesture; this modal provides that gesture.
+  setTimeout(showNotificationWelcome,650);
+}
+
+async function toggleTigreListening(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){alert("Tu navegador no tiene reconocimiento de voz continuo. Puedes usar “Analizar ahora”.");return}
+  if(tigreListening){stopTigreListening();return}
+  if(!advisorStream){await startAdvisorCamera();if(!advisorStream)return}
+  tigreListening=true;
+  advisorListenBtn.textContent="■ Detener escucha";
+  advisorLiveStatus.style.display="flex";
+  advisorLiveText.textContent='Di “Tigre, mira eso” cuando quieras que analice lo que está viendo.';
+  tigreRecognition=new SR();tigreRecognition.lang="es-PA";tigreRecognition.continuous=true;tigreRecognition.interimResults=false;tigreRecognition.maxAlternatives=1;
+  tigreRecognition.onresult=(e)=>{
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      if(!e.results[i].isFinal)continue;
+      const phrase=(e.results[i][0]?.transcript||"").toLowerCase();
+      advisorLiveText.textContent=`Tigre escuchó: “${phrase}”`;
+      if(/\btigre\b/.test(phrase)&&/(mira|mire|ve|eso|qué es|que es|analiza|analiz[aá])/i.test(phrase)){
+        advisorLiveText.textContent="Tigre está mirando…";
+        captureAdvisorPhoto();
+        return;
+      }
+    }
+  };
+  tigreRecognition.onerror=(e)=>{if(e.error!=="no-speech")advisorLiveText.textContent="No pude escuchar. Intenta otra vez."};
+  tigreRecognition.onend=()=>{if(tigreListening){try{tigreRecognition.start()}catch(e){}}};
+  try{tigreRecognition.start()}catch(e){stopTigreListening()}
+}
+function stopTigreListening(){tigreListening=false;if(tigreRecognition){try{tigreRecognition.onend=null;tigreRecognition.stop()}catch(e){}tigreRecognition=null}advisorListenBtn.textContent="🎙 Escuchar a Tigre";if(document.getElementById("advisorLiveStatus"))advisorLiveStatus.style.display="none"}
+
+
+let deferredInstallPrompt=null;
+function isIosDevice(){return /iphone|ipad|ipod/i.test(navigator.userAgent)}
+function isStandalone(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true}
+function showInstallBanner(){if(isStandalone())return;document.getElementById("installBanner").classList.add("show")}
+function hideInstallBanner(){document.getElementById("installBanner").classList.remove("show");localStorage.setItem("rider_install_banner_hidden","1")}
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstallPrompt=e;showInstallBanner()});
+window.addEventListener("appinstalled",()=>{deferredInstallPrompt=null;document.getElementById("installBanner").classList.remove("show");toast("✓ Rider Finanzas instalada")});
+async function installRider(){
+  if(deferredInstallPrompt){
+    const result=await deferredInstallPrompt.prompt();
+    if(result?.outcome==="accepted")toast("✓ Instalación aceptada");
+    deferredInstallPrompt=null;return;
+  }
+  if(isIosDevice()){
+    alert("En iPhone/iPad: abre Compartir y elige “Añadir a pantalla de inicio”.");
+    return;
+  }
+  alert("Rider Finanzas todavía no está disponible como instalación directa en este navegador. Ábrela desde HTTPS y aparecerá la opción de instalar.");
+}
+function initInstallUI(){
+  const b=document.getElementById("installBtn");if(b)b.onclick=installRider;
+  if(localStorage.getItem("rider_install_banner_hidden")!=="1"&& !isStandalone())setTimeout(()=>showInstallBanner(),1400);
+}
+
+function render(){
+  const t=totals(),base=t.income||S.salary||0,bal=t.income-t.expense-t.saving;
+  const remaining=Math.max(0,base?bal/base*100:100),expenseRatio=base?t.expense/base*100:0,saveRatio=base?t.saving/base*100:0,sub=subscriptionTotal(),subRatio=base?sub/base*100:0;
+  kIncome.textContent=money(t.income);kExpense.textContent=money(t.expense);kSavings.textContent=money(t.saving);heroBalance.textContent=money(bal);
+  remainingPercent.textContent=base?remaining.toFixed(0)+"%":"100%";expenseRatio.textContent=expenseRatio.toFixed(0)+"%";saveRatio.textContent=saveRatio.toFixed(0)+"%";subscriptionRatio.textContent=subRatio.toFixed(0)+"%";
+  avatar.textContent=(S.name||"R").trim().charAt(0).toUpperCase();
+  monthPicker.value=month;
+  renderHealth(t,remaining);renderTopAlert(remaining,subRatio);renderMonitor(t,remaining,subRatio);renderRecent();renderBudgetDash();
+  renderMoves();renderBudgets();renderGoals();renderDebts();renderStats();
+  cfgName.value=S.name||"";cfgSalary.value=S.salary||0;cfgCurrency.value=S.currency||"$";
+  if(typeof cfgThreshold!=="undefined"){cfgThreshold.value=Math.round((S.alerts?.threshold??0.50)*100);cfgCritical.value=Math.round((S.alerts?.critical??0.15)*100);cfgSound.checked=S.alerts?.sound!==false;cfgBrowser.checked=S.alerts?.browser!==false;}
+}
+function subscriptionTotal(){return mMoves().filter(x=>x.type==="expense"&&x.cat==="Suscripciones").reduce((a,x)=>a+x.amount,0)}
+function renderHealth(t,remaining){
+  const base=t.income||S.salary||0,status=document.getElementById("status"),headline=document.getElementById("healthHeadline"),text=document.getElementById("healthText");
+  const score=document.getElementById("score");score.textContent=Math.round(remaining);
+  if(!base){status.textContent="Configura";status.style.color="#ffd34e";status.style.borderColor="#63531a";status.style.background="#1c190e";headline.textContent="Configura tu sueldo";text.textContent="Después podrás ver cuánto dinero te queda y recibir alertas.";return}
+  if(remaining<=15){status.textContent="Presión";status.style.color="#ff8a83";status.style.borderColor="#66312f";status.style.background="#211315";headline.textContent="Controla tus gastos";text.textContent="Te queda muy poco dinero disponible. Evita gastos no esenciales."}
+  else if(remaining<=25){status.textContent="Atención";status.style.color="#ffd34e";status.style.borderColor="#63531a";status.style.background="#1c190e";headline.textContent="Ojo con tus gastos";text.textContent=`Solo te queda ${remaining.toFixed(0)}% disponible. Ya estás entrando en zona de presión.`}
+  else if(remaining<=50){status.textContent="Vigilar";status.style.color="#ffd34e";status.style.borderColor="#63531a";status.style.background="#1c190e";headline.textContent="Conviene vigilar";text.textContent=`Has utilizado ${(100-remaining).toFixed(0)}% de tu dinero disponible este mes.`}
+  else{status.textContent="En orden";status.style.color="#42d99a";status.style.borderColor="#315f4a";status.style.background="#10251c";headline.textContent="Todo bajo control";text.textContent=`Todavía tienes ${remaining.toFixed(0)}% de tu dinero disponible.`}
+}
+function renderTopAlert(remaining,subRatio){
+  const t=totals(),base=t.income||S.salary||0,a=document.getElementById("alertStrip");
+  let item=null;
+  if(base&&remaining<=15)item={type:"danger",icon:"!",title:"Dinero casi agotado",text:`Solo queda ${remaining.toFixed(0)}% disponible. Controla tus gastos antes de terminar el mes.`};
+  else if(base&&remaining<=25)item={type:"warning",icon:"!",title:"Controla tus gastos",text:`Te queda ${remaining.toFixed(0)}% disponible. Ya estás entrando en zona de presión.`};
+  else if(subRatio>=8)item={type:"warning",icon:"↻",title:"Presión de suscripciones",text:`Tus suscripciones representan ${subRatio.toFixed(0)}% de tus ingresos este mes.`};
+  if(!item){a.className="ec-alert";a.innerHTML="";return}
+  a.className="ec-alert show "+(item.type==="warning"?"warning":"");a.innerHTML=`<div class="alert-dot">${item.icon}</div><div><strong>${item.title}</strong><br><span>${item.text}</span></div>`;
+}
+function renderMonitor(t,remaining,subRatio){
+  const items=[],base=t.income||S.salary||0;
+  if(!base)items.push({cls:"warn",icon:"!",title:"Configura tu sueldo",text:"Necesitamos un ingreso base para medir tu margen."});
+  if(base&&remaining<=25)items.push({cls:remaining<=15?"":"warn",icon:"!",title:remaining<=15?"Dinero casi agotado":"Controla tus gastos",text:`Te queda ${remaining.toFixed(0)}% disponible.`});
+  if(subRatio>=8)items.push({cls:subRatio>=15?"":"warn",icon:"↻",title:"Presión de suscripciones",text:`Representan ${subRatio.toFixed(0)}% de tus ingresos.`});
+  const over=cats.map(c=>({c,lim:S.budgets[c]||0,used:mMoves().filter(x=>x.type==="expense"&&x.cat===c).reduce((a,x)=>a+x.amount,0)})).filter(x=>x.lim>0&&x.used>x.lim);
+  if(over.length)items.push({icon:"!",title:"Presupuesto rebasado",text:`${over[0].c} superó su límite mensual.`});
+  if(!items.length)items.push({cls:"ok",icon:"✓",title:"No hay alertas críticas",text:"Tu sistema seguirá vigilando gastos, suscripciones y presupuesto."});
+  dashboardAlerts.innerHTML=items.slice(0,4).map(x=>`<div class="monitor-item ${x.cls||""}"><div class="mi">${x.icon}</div><div><strong>${x.title}</strong><span>${x.text}</span></div></div>`).join("");
+}
+function renderRecent(){
+  const m=mMoves().slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0,6);
+  recent.innerHTML=m.length?`<div class="activity">${m.map(x=>`<div class="activity-row"><div class="activity-icon">${x.type==="income"?"↗":x.type==="saving"?"◎":"↘"}</div><div><div class="activity-desc">${x.desc||x.cat}</div><div class="activity-cat">${x.cat} · ${x.date}</div></div><div class="activity-amt">${x.type==="income"?"+":x.type==="expense"?"−":"•"}${money(x.amount)}</div></div>`).join("")}</div>`:`<div class="empty">Todavía no hay movimientos registrados.<br><button class="btn btn-soft" style="margin-top:10px" onclick="openModal('income')">Registrar tu primer ingreso</button></div>`;
+}
+function renderBudgetDash(){
+  const m=mMoves(),rows=cats.filter(c=>S.budgets[c]>0).slice(0,5).map(c=>{const used=m.filter(x=>x.type==="expense"&&x.cat===c).reduce((a,x)=>a+x.amount,0),lim=S.budgets[c],p=Math.min(100,used/lim*100);return `<div class="budget-line"><div class="budget-head"><span>${c}</span><span>${money(used)} / ${money(lim)}</span></div><div class="track"><div class="fill" style="width:${p}%"></div></div></div>`});
+  budgetDash.innerHTML=rows.join("")||`<div class="empty">Aún no hay presupuestos definidos.</div>`;
+}
+function renderMoves(){const m=S.moves.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));movementTable.innerHTML=m.length?`<table class="table"><tr><th>Fecha</th><th>Descripción</th><th>Categoría</th><th>Tipo</th><th>Monto</th><th></th></tr>${m.map(x=>`<tr><td>${x.date}</td><td>${x.desc||"-"}</td><td>${x.cat}</td><td><span class="pill ${x.type==="income"?"in":"out"}">${x.type==="income"?"Ingreso":x.type==="saving"?"Ahorro":"Gasto"}</span></td><td>${money(x.amount)}</td><td><button class="btn btn-danger" onclick="delMove('${x.id}')">×</button></td></tr>`).join("")}</table>`:`<div class="empty">No hay movimientos registrados.</div>`}
+function renderBudgets(){budgetForm.innerHTML=cats.map(c=>`<div class="field"><label>${c}</label><input class="budgetInput" data-cat="${c}" type="number" min="0" step="0.01" value="${S.budgets[c]||0}"></div>`).join("")}
+function renderGoals(){goals.innerHTML=S.goals.length?S.goals.map((g,i)=>{const p=Math.min(100,g.target?g.saved/g.target*100:0);return `<div class="budget-line" style="margin-bottom:17px"><div class="budget-head"><span><b>${g.name}</b></span><span>${money(g.saved)} / ${money(g.target)}</span></div><div class="track"><div class="fill" style="width:${p}%"></div></div><div class="actions" style="margin-top:7px"><button class="btn btn-soft" onclick="goalAdd(${i})">＋ Aportar</button> <button class="btn btn-danger" onclick="delGoal(${i})">Eliminar</button></div></div>`}).join(""):`<div class="empty">Crea tu primera meta de ahorro.</div>`;goalTotal.textContent=money(S.goals.reduce((a,g)=>a+g.target,0));goalSaved.textContent=money(S.goals.reduce((a,g)=>a+g.saved,0))}
+function renderDebts(){debts.innerHTML=S.debts.length?`<table class="table"><tr><th>Deuda</th><th>Total</th><th>Pagado</th><th>Restante</th><th></th></tr>${S.debts.map((d,i)=>`<tr><td>${d.name}</td><td>${money(d.total)}</td><td>${money(d.paid)}</td><td>${money(Math.max(0,d.total-d.paid))}</td><td><button class="btn btn-soft" onclick="debtPay(${i})">＋ Pago</button> <button class="btn btn-danger" onclick="delDebt(${i})">×</button></td></tr>`).join("")}</table>`:`<div class="empty">No tienes deudas registradas.</div>`}
+function renderStats(){const m=mMoves(),total=m.filter(x=>x.type==="expense").reduce((a,x)=>a+x.amount,0);stats.innerHTML=cats.map(c=>{const v=m.filter(x=>x.type==="expense"&&x.cat===c).reduce((a,x)=>a+x.amount,0);if(!v)return "";return `<div class="budget-line" style="margin:13px 0"><div class="budget-head"><span>${c}</span><span>${money(v)} · ${total?(v/total*100).toFixed(1):0}%</span></div><div class="track"><div class="fill" style="width:${total?v/total*100:0}%"></div></div></div>`}).join("")||`<div class="empty">No hay gastos para analizar.</div>`;const t=totals();summary.innerHTML=`<p style="font-size:12px">Ingresos <b style="float:right">${money(t.income)}</b></p><p style="font-size:12px">Gastos <b style="float:right">${money(t.expense)}</b></p><p style="font-size:12px">Ahorro <b style="float:right">${money(t.saving)}</b></p><p style="font-size:12px">Disponible <b style="float:right">${money(t.income-t.expense-t.saving)}</b></p>`}
+function setModalType(type){
+  mType.value=type;
+  const incomeCats=["Sueldo","Trabajo extra","Venta","Otro ingreso"];
+  const expenseCats=["Comida","Transporte","Hogar","Servicios","Compras","Entretenimiento","Salidas","Relación","Estudios","Salud","Suscripciones","Deudas","Aseo personal","Otros"];
+  const savingCats=["Fondo de emergencia","Meta de ahorro","Ahorro general"];
+  const opts=type==="income"?incomeCats:type==="saving"?savingCats:expenseCats;
+  mCat.innerHTML=opts.map(x=>`<option>${x}</option>`).join("");
+  modalTitle.textContent=type==="income"?"Registrar ingreso":type==="saving"?"Registrar ahorro":"Registrar gasto";
+  mDesc.placeholder=type==="income"?"Ej. Pago de sueldo":type==="saving"?"Ej. Aporte a fondo de emergencia":"Ej. Supermercado";
+}
+function openModal(type){setModalType(type||"expense");mDate.value=new Date().toISOString().slice(0,10);modal.classList.add("open");mAmount.focus()}
+function closeModal(){modal.classList.remove("open")}
+moveForm.onsubmit=e=>{e.preventDefault();const amount=+mAmount.value;if(!(amount>0))return;S.moves.push({id:crypto.randomUUID(),type:mType.value,amount,cat:mCat.value,date:mDate.value,desc:mDesc.value.trim()});moveForm.reset();closeModal();persist();toast("Movimiento guardado")}
+function delMove(id){S.moves=S.moves.filter(x=>x.id!==id);persist();toast("Movimiento eliminado")}
+function saveBudgets(){document.querySelectorAll(".budgetInput").forEach(i=>S.budgets[i.dataset.cat]=+i.value||0);persist();toast("Presupuesto actualizado")}
+function addGoal(){const n=prompt("Nombre de la meta:");if(!n)return;const t=+prompt("Monto objetivo:");if(!(t>0))return;S.goals.push({name:n,target:t,saved:0});persist()}
+function goalAdd(i){const v=+prompt("¿Cuánto quieres aportar?");if(v>0){S.goals[i].saved=Math.min(S.goals[i].target,S.goals[i].saved+v);persist();toast("Aporte registrado")}}
+function delGoal(i){if(confirm("¿Eliminar esta meta?")){S.goals.splice(i,1);persist()}}
+function addDebt(){const n=prompt("Nombre de la deuda:");if(!n)return;const t=+prompt("Monto total:");if(!(t>0))return;S.debts.push({name:n,total:t,paid:0});persist()}
+function debtPay(i){const v=+prompt("Monto del pago:");if(v>0){S.debts[i].paid=Math.min(S.debts[i].total,S.debts[i].paid+v);persist();toast("Pago registrado")}}
+function delDebt(i){if(confirm("¿Eliminar esta deuda?")){S.debts.splice(i,1);persist()}}
+function exportData(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,2)],{type:"application/json"}));a.download="mi-control-sueldo-respaldo.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+importFile.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{S=JSON.parse(r.result);S.budgets=Object.assign({},blank.budgets,S.budgets||{});persist();toast("Datos importados")}catch{alert("El archivo no es válido")}};r.readAsText(f)}
+configForm.onsubmit=e=>{e.preventDefault();
+S.name=cfgName.value.trim()||"Rider";S.salary=+cfgSalary.value||0;S.currency=cfgCurrency.value;
+S.alerts=S.alerts||{};S.alerts.threshold=Math.max(0.01,Math.min(0.9,(+cfgThreshold.value||50)/100));S.alerts.soon=0.30;S.alerts.critical=Math.max(0.01,Math.min(0.5,(+cfgCritical.value||15)/100));S.alerts.sound=!!cfgSound.checked;S.alerts.browser=!!cfgBrowser.checked;
+S.tigre=Object.assign({},S.tigre||{}, {voice:!!cfgTigreVoice.checked,rate:.98,pitch:1.02});
+if(S.alerts.browser&&"Notification" in window&&Notification.permission==="default"){Notification.requestPermission().catch(()=>{})}
+persist();toast("Configuración guardada")}
+function resetAll(){if(confirm("Esto borrará todos tus datos. ¿Continuar?")){S=structuredClone(blank);persist();toast("Datos borrados")}}
+function toast(msg){toastEl.textContent=msg;toastEl.style.display="block";setTimeout(()=>toastEl.style.display="none",1900)}
+monthPicker.value=month;monthPicker.onchange=()=>{month=monthPicker.value;render()}
+render();checkSmartAlerts();setInterval(checkSmartAlerts,30000);
+</script>
+</body></html>
