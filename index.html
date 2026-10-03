@@ -175,6 +175,113 @@ body{background:var(--ec-bg)}
 @media(max-width:820px){.install-banner{left:100px;right:18px}}
 @media(max-width:650px){.install-banner{left:74px;right:8px;top:9px}.install-copy span{display:none}.install-banner .btn{padding:8px 9px;font-size:9px}}
 
+
+/* ===== RIDER FINANZAS — MOBILE APP UI V4 ===== */
+@media (max-width:650px){
+  html,body{width:100%;min-width:0;overflow-x:hidden;background:#070b10;color:#f4f7fb}
+  body{padding:0 0 76px!important}
+
+  /* Top app bar */
+  .topbar{
+    position:fixed;left:0;right:0;top:0;height:62px;margin:0!important;padding:9px 14px;
+    background:rgba(7,11,16,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid #202b35;z-index:70;
+  }
+  .hello{gap:9px}.avatar{width:36px;height:36px;border-radius:11px;font-size:13px;background:#ffc400;color:#111;box-shadow:none}
+  .hello .eyebrow{font-size:8px;color:#778594;letter-spacing:.2px}
+  .hello h1{font-size:18px;line-height:1.05;margin:1px 0 0;color:#f5f7fb;letter-spacing:-.5px}
+  .top-actions{margin-left:auto}.month{font-size:9px;padding:8px 9px;border-radius:9px;background:#101720;border-color:#26333f;color:#dce3ea;max-width:126px}
+
+  /* No desktop left rail on phone */
+  .sidebar{
+    position:fixed!important;left:0!important;right:0!important;top:auto!important;bottom:0!important;
+    width:100%!important;height:70px!important;padding:5px 4px!important;
+    background:rgba(9,13,18,.98)!important;border:0!important;border-top:1px solid #26323c!important;
+    box-shadow:0 -10px 30px #0008!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    z-index:100!important;overflow:hidden!important;
+  }
+  .logo,.nav-title{display:none!important}
+  .nav{height:100%;display:flex!important;flex-direction:row!important;align-items:stretch!important;justify-content:space-around;gap:2px!important}
+  .nav button{
+    display:flex!important;flex:1 1 0;min-width:0!important;width:auto!important;height:60px!important;min-height:60px!important;
+    margin:0!important;padding:6px 1px!important;border-radius:11px!important;
+    flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;
+    background:transparent!important;color:#81909d!important;font-size:0!important;box-shadow:none!important;text-align:center!important;
+  }
+  .nav button:hover{background:#101820!important;color:#cbd5df!important}
+  .nav button.active{background:#151e27!important;color:#ffc400!important;box-shadow:inset 0 2px #ffc400!important}
+  .nav-ico{display:block!important;width:auto!important;font-size:17px!important;line-height:1!important}
+  .nav-label{display:block!important;font-size:8px!important;line-height:1!important;white-space:nowrap!important;color:inherit}
+  .nav button:nth-child(1) .nav-label:after,.nav button:nth-child(2) .nav-label:after,.nav button:nth-child(3) .nav-label:after,
+  .nav button:nth-child(4) .nav-label:after,.nav button:nth-child(5) .nav-label:after,.nav button:nth-child(6) .nav-label:after,
+  .nav button:nth-child(7) .nav-label:after,.nav button:nth-child(8) .nav-label:after{content:none!important}
+  .nav button:nth-child(6),.nav button:nth-child(7){display:none!important}
+  .nav button:nth-child(5) .nav-label{font-size:0!important}
+  .nav button:nth-child(5) .nav-label:after{content:"Más"!important;font-size:8px!important}
+  .nav button:nth-child(8) .nav-label{font-size:0!important}
+  .nav button:nth-child(8) .nav-label:after{content:"Tigre"!important;font-size:8px!important}
+  .nav button:nth-child(5) .nav-ico{font-size:16px!important}
+
+  /* Full-width phone content */
+  .main{margin:0!important;width:100%!important;max-width:none!important;padding:76px 12px 24px!important}
+  .page{width:100%}
+  .ec-head{display:flex;align-items:flex-start!important;gap:10px;margin-bottom:12px}
+  .ec-head h2{font-size:22px!important;letter-spacing:-.7px;margin:0 0 4px!important}
+  .ec-head p{font-size:10px!important;line-height:1.35!important;margin:0!important;color:#82909d}
+  .ec-primary{width:auto!important;min-height:40px!important;padding:10px 12px!important;border-radius:12px!important;font-size:10px!important;white-space:nowrap}
+
+  /* KPI cards become a real phone grid */
+  .ec-kpis{grid-template-columns:1fr 1fr!important;gap:9px!important;margin-top:10px!important}
+  .ec-kpi{min-width:0!important;border-radius:15px!important;padding:13px!important;background:#101720!important;border-color:#24313d!important;box-shadow:none!important}
+  .ec-kpi-label{font-size:9px!important}.ec-kpi-value{font-size:20px!important;margin-top:7px!important}.ec-kpi-sub{font-size:8px!important;line-height:1.25!important}
+  .ec-alert{border-radius:13px!important;margin:10px 0!important;padding:10px!important;font-size:9px!important}
+
+  /* Dashboard cards */
+  .dashboard-grid{grid-template-columns:1fr!important;gap:10px!important;margin-top:10px!important}
+  .card-main,.panel{border-radius:16px!important;padding:14px!important;background:#101720!important;border-color:#24313d!important;box-shadow:none!important}
+  .section-head{margin-bottom:11px!important}.section-head h2,.panel h2{font-size:14px!important}
+  .btn{border-radius:10px!important;padding:9px 11px!important;font-size:10px!important}
+  .actions{gap:6px!important}
+  .table-wrap{margin:0 -4px;padding:0 4px}
+  .table{font-size:10px!important}.table th,.table td{padding:9px 6px!important}
+  .form-grid{grid-template-columns:1fr!important;gap:9px!important}.field.full{grid-column:auto!important}
+  .field label{font-size:9px!important;color:#98a5b2!important}.field input,.field select{padding:10px!important;border-radius:10px!important;background:#0b1117!important;color:#edf2f6!important;border-color:#273541!important}
+
+  /* Floating Tigre stays above bottom nav */
+  .tigre-bubble{right:12px!important;bottom:86px!important;width:48px!important;height:48px!important;z-index:90!important}
+  .control-bubble{right:12px!important;bottom:144px!important;z-index:89!important}
+  .alert-center{right:12px!important;bottom:86px!important;z-index:88!important}
+
+  /* Install banner becomes a compact native-looking card */
+  .install-banner{left:12px!important;right:12px!important;top:68px!important;max-width:none!important;border-radius:14px!important;padding:9px!important}
+  .install-copy b{font-size:9px!important}.install-copy span{display:block!important;font-size:7px!important}
+  .install-banner .btn{padding:8px 10px!important;font-size:9px!important}
+
+  /* Tigre purchase screen behaves like a phone sheet, not a desktop dialog */
+  .advisor-modal{padding:0!important;place-items:stretch!important;background:#05080df2!important}
+  .advisor-box{
+    width:100%!important;height:100dvh!important;max-height:none!important;border:0!important;border-radius:0!important;
+    padding:12px 12px calc(14px + env(safe-area-inset-bottom))!important;overflow-y:auto!important;
+    background:#0b1117!important;box-shadow:none!important;
+  }
+  .advisor-head{position:sticky;top:0;z-index:3;background:#0b1117;padding-bottom:9px;margin-bottom:4px}
+  .advisor-head h2{font-size:17px!important;margin:1px 0 3px!important}.advisor-head p{font-size:9px!important;line-height:1.4!important}
+  .advisor-avatar{width:44px!important;height:44px!important}.tigre-head-wrap{gap:8px!important}
+  .advisor-purpose{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;font-size:9px!important}
+  .purpose-btn{padding:8px 10px!important;border-radius:10px!important;font-size:9px!important}
+  .advisor-camera-wrap{min-height:38dvh!important;height:38dvh!important;margin-top:10px!important;border-radius:14px!important}
+  .advisor-video,.advisor-image{min-height:100%!important;max-height:none!important;object-fit:cover!important}
+  .advisor-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:9px!important}
+  .advisor-actions .btn,.advisor-actions label{min-width:0!important;width:100%!important;font-size:9px!important;padding:10px 8px!important;text-align:center!important}
+  .advisor-foot{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:9px!important}
+  .advisor-foot .btn{min-width:0!important;width:100%!important}
+
+  /* Other modals become bottom-sheet style */
+  .modal{padding:0!important;place-items:end!important}.modal-box{width:100%!important;max-height:88dvh!important;overflow:auto!important;border-radius:20px 20px 0 0!important;padding:17px!important;background:#101720!important;color:#fff;border-color:#293742!important}
+  .modal-box .field label{color:#9ca9b5!important}.modal-box .field input,.modal-box .field select{background:#0b1117!important;color:#fff!important;border-color:#293742!important}
+  .more-sheet{z-index:110!important}.sheet{background:#101720!important;color:#fff!important;border:1px solid #293742;border-bottom:0;padding:17px!important}.sheet-grid{grid-template-columns:1fr 1fr!important}.sheet button{background:#151e27!important;color:#e7edf2!important;border-color:#293742!important}
+}
+
 </style>
 </head>
 <body>
