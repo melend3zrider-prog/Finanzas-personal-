@@ -41,6 +41,14 @@ button{cursor:pointer}
 .more-sheet{position:fixed;inset:0;background:#0c0f1c88;display:none;align-items:flex-end;z-index:60}.more-sheet.open{display:flex}.sheet{width:100%;background:#fff;border-radius:22px 22px 0 0;padding:17px}.sheet h3{margin:0 0 10px;font-size:15px}.sheet-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.sheet button{border:1px solid var(--line);background:#fafbff;padding:13px;border-radius:12px;text-align:left;font-weight:750;font-size:12px}
 @media(max-width:820px){.sidebar{width:82px;padding:18px 10px}.logo{justify-content:center;padding-bottom:24px}.logo-text,.nav-title{display:none}.logo-mark{margin:0}.nav button{justify-content:center;font-size:0}.nav-ico{font-size:17px}.main{margin-left:82px;width:calc(100% - 82px);padding:23px}.hero{grid-template-columns:1fr}.dashboard-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){
+ html,body{overscroll-behavior-y:none}
+ body{padding-bottom:73px;overflow-x:hidden}
+ .modal,.advisor-modal,.more-sheet{touch-action:none}
+ .modal-box,.advisor-box,.sheet{touch-action:pan-y;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ .modal-box{max-height:calc(100dvh - 10px)!important;padding-bottom:max(18px,env(safe-area-inset-bottom))!important}
+ .modal-box form{padding-bottom:4px}
+ .modal-box form > .btn-primary{position:sticky;bottom:0;z-index:2;box-shadow:0 -10px 20px #101720}
+ body.modal-open,body.advisor-open{overflow:hidden!important}
  body{padding-bottom:73px}.sidebar{position:fixed;left:0;right:0;top:auto;bottom:0;width:100%;height:68px;padding:5px 6px;background:#11152af5;backdrop-filter:blur(18px);box-shadow:0 -12px 35px #11152a22}.logo,.nav-title{display:none}.nav{height:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:2px}.nav button{justify-content:center;align-items:center;gap:1px;padding:6px 2px;margin:0;border-radius:10px;font-size:8px;color:#aeb6cc;box-shadow:none}.nav button.active{background:#ffffff12;box-shadow:none;color:#fff}.nav-ico{font-size:17px}.nav button[data-page="dashboard"] .nav-label:after{content:"Inicio"}.nav button[data-page="movimientos"] .nav-label:after{content:"Movimientos"}.nav button[data-page="presupuesto"] .nav-label:after{content:"Presupuesto"}.nav button[data-page="ahorro"] .nav-label:after{content:"Ahorro"}.nav button[data-page="deudas"] .nav-label:after{content:"Más"} .nav button[data-page="deudas"] .nav-label{font-size:0}
  .nav button[data-page="estadisticas"],.nav button[data-page="config"]{display:none}.main{margin:0;width:100%;padding:14px 12px 10px}.topbar{margin-bottom:14px;align-items:flex-start}.hello h1{font-size:21px}.avatar{width:40px;height:40px}.month{padding:8px 9px;font-size:11px}.hero{gap:10px}.balance-card{padding:20px;border-radius:20px}.balance{font-size:33px}.balance-row{margin-top:18px}.health{padding:17px;border-radius:19px}.kpis{gap:9px;margin-top:10px}.kpi{padding:13px;border-radius:15px}.kpi .money{font-size:19px}.dashboard-grid{gap:10px;margin-top:10px}.panel{padding:15px;border-radius:17px}.chart{height:155px;gap:8px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.table th:nth-child(1),.table td:nth-child(1){display:none}
 }
@@ -273,8 +281,11 @@ body{background:var(--ec-bg)}
   .advisor-video,.advisor-image{min-height:100%!important;max-height:none!important;object-fit:cover!important}
   .advisor-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:9px!important}
   .advisor-actions .btn,.advisor-actions label{min-width:0!important;width:100%!important;font-size:9px!important;padding:10px 8px!important;text-align:center!important}
+  .advisor-actions button:nth-child(2){grid-column:1 / -1}
   .advisor-foot{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:9px!important}
   .advisor-foot .btn{min-width:0!important;width:100%!important}
+  .advisor-box{max-height:100dvh!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding-bottom:max(15px,env(safe-area-inset-bottom))!important}
+  .advisor-head{position:sticky;top:0;z-index:4;background:#101720;padding-bottom:9px}
 
   /* Other modals become bottom-sheet style */
   .modal{padding:0!important;place-items:end!important}.modal-box{width:100%!important;max-height:88dvh!important;overflow:auto!important;border-radius:20px 20px 0 0!important;padding:17px!important;background:#101720!important;color:#fff;border-color:#293742!important}
@@ -283,6 +294,41 @@ body{background:var(--ec-bg)}
 }
 
 </style>
+<style>
+@media (max-width: 700px){
+  /* v23: slightly larger, more readable phone typography */
+  body{font-size:15px!important}
+  .hello h1{font-size:20px!important}
+  .month{font-size:10px!important}
+  .nav button{gap:5px!important}
+  .nav-ico{font-size:19px!important}
+  .nav-label{font-size:9px!important}
+  .nav button:nth-child(5) .nav-label:after,.nav button:nth-child(8) .nav-label:after{font-size:9px!important}
+  .ec-head h2{font-size:24px!important}
+  .ec-head p{font-size:11px!important}
+  .ec-primary{font-size:11px!important;padding:11px 13px!important}
+  .ec-kpi-label{font-size:10px!important}
+  .ec-kpi-value{font-size:22px!important}
+  .ec-kpi-sub{font-size:9px!important}
+  .ec-alert{font-size:10px!important}
+  .section-head h2,.panel h2{font-size:16px!important}
+  .btn{font-size:11px!important;padding:10px 12px!important}
+  .table{font-size:11px!important}
+  .table th,.table td{padding:10px 7px!important}
+  .field label{font-size:10px!important}
+  .field input,.field select{font-size:14px!important;padding:12px!important}
+  .install-copy b{font-size:10px!important}
+  .install-copy span{font-size:8px!important}
+  .install-banner .btn{font-size:10px!important}
+  .advisor-head h2{font-size:19px!important}
+  .advisor-head p{font-size:10px!important}
+  .advisor-purpose{font-size:10px!important}
+  .purpose-btn{font-size:10px!important;padding:9px 11px!important}
+  .advisor-actions .btn,.advisor-actions label{font-size:10px!important;padding:11px 9px!important}
+  .modal-box .field input,.modal-box .field select{font-size:14px!important}
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -524,6 +570,7 @@ body{background:var(--ec-bg)}
 
     <div class="advisor-actions">
       <button class="btn btn-soft" onclick="startAdvisorCamera()">▣ Activar cámara</button>
+      <button class="btn btn-soft" onclick="openAdvisorPhoneCamera()">📷 Cámara del teléfono</button>
       <button class="btn btn-primary" id="advisorCaptureBtn" onclick="captureAdvisorPhoto()" disabled>● Analizar ahora</button>
       <button class="btn btn-soft" id="advisorListenBtn" onclick="toggleTigreListening()">🎙 Escuchar</button>
       <button class="btn btn-soft" id="advisorVoiceBtn" onclick="toggleTigreVoice()">🔊 Voz ON</button>
@@ -612,7 +659,11 @@ function persist(){localStorage.setItem(KEY,JSON.stringify(S)); render(); setTim
 function money(n){return `${S.currency}${Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`}
 function mMoves(){return S.moves.filter(x=>(x.date||"").slice(0,7)===month)}
 function totals(){const m=mMoves();return {income:m.filter(x=>x.type==="income").reduce((a,x)=>a+x.amount,0),expense:m.filter(x=>x.type==="expense").reduce((a,x)=>a+x.amount,0),saving:m.filter(x=>x.type==="saving").reduce((a,x)=>a+x.amount,0)}}
-function openPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));const p=document.getElementById(id);if(!p)return;p.classList.add("active");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));document.getElementById("pageTitle").textContent=id==="dashboard"?"Resumen":p.querySelector("h2")?.textContent||id;window.scrollTo({top:0,behavior:"smooth"});if(window.innerWidth<=650&&["deudas","estadisticas","config"].includes(id))closeMore()}
+function openPage(id){
+  const advisor=document.getElementById("advisorModal"); if(advisor?.classList.contains("open")) closeAdvisor();
+  const scanner=document.getElementById("scanModal"); if(scanner?.classList.contains("open")) closeScanner();
+  const modalEl=document.getElementById("modal"); if(modalEl?.classList.contains("open")) closeModal();
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));const p=document.getElementById(id);if(!p)return;p.classList.add("active");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));document.getElementById("pageTitle").textContent=id==="dashboard"?"Resumen":p.querySelector("h2")?.textContent||id;window.scrollTo({top:0,behavior:"smooth"});if(window.innerWidth<=650&&["deudas","estadisticas","config"].includes(id))closeMore()}
 document.querySelectorAll(".nav button").forEach(btn=>btn.addEventListener("click",()=>{ if(window.innerWidth<=650 && btn.dataset.page==="deudas"){openMore();return} openPage(btn.dataset.page)}));
 function openMore(){document.getElementById("moreSheet").classList.add("open")}function closeMore(){document.getElementById("moreSheet").classList.remove("open")}
 
@@ -743,14 +794,19 @@ function toggleTigreVoice(){
 
 
 
-function openAdvisor(){document.getElementById("advisorModal").classList.add("open");resetAdvisor()}
-function closeAdvisor(){document.getElementById("advisorModal").classList.remove("open");stopAdvisorCamera();resetAdvisorUI();if("speechSynthesis" in window)speechSynthesis.cancel();setTigreSpeaking(false)}
+function openAdvisor(){document.getElementById("advisorModal").classList.add("open");document.body.classList.add("advisor-open");resetAdvisor()}
+function closeAdvisor(){document.getElementById("advisorModal").classList.remove("open");document.body.classList.remove("advisor-open");stopAdvisorCamera();resetAdvisorUI();if("speechSynthesis" in window)speechSynthesis.cancel();setTigreSpeaking(false)}
 function setAdvisorPurpose(p){advisorPurpose=p;purposeNeed.classList.toggle("active",p==="need");purposeWant.classList.toggle("active",p==="want");}
 function resetAdvisorUI(){
   advisorVoiceBtn.textContent=S.tigre?.voice!==false?"🔊 Voz ON":"🔇 Voz OFF";
   advisorProgress.style.display="none";advisorResult.style.display="none";advisorImage.style.display="none";advisorVideo.style.display="none";advisorCameraPlaceholder.style.display="grid";advisorLiveBadge.style.display="none";advisorCaptureBtn.disabled=true;advisorInput.value="";advisorFill.style.width="0%";advisorPct.textContent="0%";advisorStatus.textContent="Tigre está mirando…";lastAdvisorAdvice=null;
 }
 function resetAdvisor(){stopAdvisorCamera();resetAdvisorUI();setAdvisorPurpose("need");}
+function openAdvisorPhoneCamera(){
+  const input=document.getElementById("advisorInput");
+  if(input){ input.value=""; input.click(); }
+}
+
 async function startAdvisorCamera(){
   if(!navigator.mediaDevices?.getUserMedia){
     advisorCameraPlaceholder.style.display="grid";
@@ -765,9 +821,9 @@ async function startAdvisorCamera(){
   }catch(e){
     console.error(e);
     const name=e?.name||"Error";
-    const msg=name==="NotAllowedError"?"El navegador bloqueó el permiso de cámara. Permítelo para localhost.":name==="NotFoundError"?"No encontré una cámara disponible.":"No pude abrir la cámara. Permite el acceso y prueba otra vez.";
+    const msg=name==="NotAllowedError"?"El acceso directo a la cámara fue bloqueado.":name==="NotFoundError"?"No encontré una cámara disponible.":name==="NotReadableError"?"La cámara está ocupada por otra aplicación.":"No pude abrir la cámara desde esta instalación.";
     advisorCameraPlaceholder.style.display="grid";
-    advisorCameraPlaceholder.innerHTML=`<div class="advisor-camera-icon">⚠</div><strong>${msg}</strong><span>También puedes usar “Subir foto”.</span>`;
+    advisorCameraPlaceholder.innerHTML=`<div class="advisor-camera-icon">⚠</div><strong>${msg}</strong><span>Pulsa <b>“Cámara del teléfono”</b> para abrir la cámara de Android y analizar la foto.</span>`;
   }
 }
 function stopAdvisorCamera(){
@@ -1113,8 +1169,8 @@ function setModalType(type){
   modalTitle.textContent=type==="income"?"Registrar ingreso":type==="saving"?"Registrar ahorro":"Registrar gasto";
   mDesc.placeholder=type==="income"?"Ej. Pago de sueldo":type==="saving"?"Ej. Aporte a fondo de emergencia":"Ej. Supermercado";
 }
-function openModal(type){setModalType(type||"expense");mDate.value=new Date().toISOString().slice(0,10);modal.classList.add("open");mAmount.focus()}
-function closeModal(){modal.classList.remove("open")}
+function openModal(type){setModalType(type||"expense");mDate.value=new Date().toISOString().slice(0,10);modal.classList.add("open");document.body.classList.add("modal-open");setTimeout(()=>mAmount.focus(),60)}
+function closeModal(){modal.classList.remove("open");document.body.classList.remove("modal-open")}
 moveForm.onsubmit=e=>{e.preventDefault();const amount=+mAmount.value;if(!(amount>0))return;S.moves.push({id:crypto.randomUUID(),type:mType.value,amount,cat:mCat.value,date:mDate.value,desc:mDesc.value.trim()});moveForm.reset();closeModal();persist();toast("Movimiento guardado")}
 function delMove(id){S.moves=S.moves.filter(x=>x.id!==id);persist();toast("Movimiento eliminado")}
 function saveBudgets(){document.querySelectorAll(".budgetInput").forEach(i=>S.budgets[i.dataset.cat]=+i.value||0);persist();toast("Presupuesto actualizado")}
